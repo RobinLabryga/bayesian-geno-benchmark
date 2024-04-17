@@ -1,0 +1,44 @@
+problems:
+single_problems:
+  BIGBANK: null
+  DALLASL: null
+  DALLASM: null
+  DALLASS: null
+  GRIDNETA: null
+  GRIDNETB: null
+  GRIDNETC: null
+  GRIDNETD: null
+  GRIDNETE: null
+  GRIDNETF: null
+  GRIDNETG: null
+  GRIDNETH: null
+  GRIDNETI: null
+  LINSPANH: null
+  LSNNODOC: null
+  SMBANK: null
+  SPANHYD: null
+  STEENBRA: null
+  STEENBRB: null
+  STEENBRC: null
+  STEENBRD: null
+  STEENBRE: null
+  STEENBRF: null
+  STEENBRG: null
+  WATER: null
+solvers:
+  GenoSolver:
+    options:
+      max_iter: 1000
+#      verbose: 10
+  ScipySolver:
+    method: L-BFGS-B
+    options:
+      maxiter: 1000
+#      disp: 10
+  GenoSolverC:
+    options:
+#      verbosity: 10
+      maxiter: 1000
+  IpoptSolver:
+    options:
+      max_iter: 1000

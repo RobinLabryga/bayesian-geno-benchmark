@@ -1,0 +1,32 @@
+problems:
+single_problems:
+#  ARGLINB:
+#  BA-L16LS:
+#  CERI651ALS:
+#  ROSZMAN1LS:
+#  LRIJCNN1: 
+#  INDEF:
+  SCURLY20:
+solvers:
+  GenoSolver:
+    options:
+      max_iter: 10000
+      verbose: 10
+      eps_pg: 0.00000001
+      eps_f: 0.
+  ScipySolver:
+    method: L-BFGS-B
+    options:
+      maxiter: 10000
+      disp: 10
+      ftol: 0.
+      gtol: 0.00000001
+  GenoSolverC:
+    options:
+      verbosity: 10
+      maxiter: 1000
+      tol: 0.00000001
+  IpoptSolver:
+    options:
+      max_iter: 1000
+      tol: 0.00000001

@@ -1,0 +1,20 @@
+name: ml-benchmarks
+channels:
+  - conda-forge
+  - anaconda
+dependencies:
+  - python>=3.8
+  - numpy
+  - autograd
+  - matplotlib
+  - ipykernel
+  - cyipopt
+  - scipy
+  - pyyaml
+  - pip
+  - pip:
+    - genosolver
+    - timeout-decorator
+    - amplpy
+    - pycutest
+    - wget

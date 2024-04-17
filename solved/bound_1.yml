@@ -1,0 +1,189 @@
+problems:
+single_problems:
+  # 3PK: null
+  # ALLINIT: null
+  # BDEXP: null
+  # BIGGSB1: null
+  # BLEACHNG: null
+  # BQP1VAR: null
+  # BQPGABIM: null
+  # BQPGASIM: null
+  # BQPGAUSS: null
+  # BRANIN: null
+  # CAMEL6: null
+  # CHARDIS0: null
+  # CHEBYQAD: null
+  # CHEBYQADNE: null
+  # CHENHARK: null
+  # CVXBQP1: null
+  # CYCLOOCTLS: null
+  # DECONVB: null
+  # DEGDIAG: null
+  # DEGTRID: null
+  # DEGTRID2: null
+  # DEVGLA1B: null
+  # DEVGLA2B: null
+  # DGOSPEC: null
+  # DIAGIQB: null
+  # DIAGIQE: null
+  # DIAGIQT: null
+  # DIAGNQB: null
+  # DIAGNQE: null
+  # DIAGNQT: null
+  # DIAGPQB: null
+  # DIAGPQE: null
+  # DIAGPQT: null
+  # EG1: null
+  # EGGCRATEB: null
+  # EIGENA: null
+  # ELATVIDUB: null
+  # EXP2B: null
+  # EXPLIN: null
+  # EXPLIN2: null
+  # EXPQUAD: null
+  # FBRAIN2LS: null
+  # FBRAINLS: null
+  # GENROSEB: null
+  # GRIDGENA: null
+  # HADAMALS: null
+  # HARKERP2: null
+  # HART6: null
+  # HATFLDA: null
+  # HATFLDB: null
+  # HATFLDC: null
+  # HIMMELP1: null
+  # HOLMES: null
+  # HS1: null
+  # HS110: null
+  # HS2: null
+  # HS25: null
+  # HS3: null
+  # HS38: null
+  # HS3MOD: null
+  # HS4: null
+  # HS45: null
+  # HS5: null
+  # JNLBRNG1: null
+  # JNLBRNG2: null
+  # JNLBRNGA: null
+  # JNLBRNGB: null
+  # KOEBHELB: null
+  # LEVYMONT: null
+  # LEVYMONT10: null
+  # LEVYMONT5: null
+  # LEVYMONT6: null
+  # LEVYMONT7: null
+  # LEVYMONT8: null
+  # LEVYMONT9: null
+  # LINVERSE: null
+  # LOGROS: null
+  # MAXLIKA: null
+  # MCCORMCK: null
+  # MDHOLE: null
+  # MINSURFO: null
+  NCVXBQP1: null
+  NCVXBQP2: null
+  NCVXBQP3: null
+  NOBNDTOR: null
+  NONSCOMP: null
+  OBSTCLAE: null
+  OBSTCLAL: null
+  OBSTCLBL: null
+  OBSTCLBM: null
+  OBSTCLBU: null
+  ODNAMUR: null
+  OSLBQP: null
+  PALMER1: null
+  PALMER1A: null
+  PALMER1B: null
+  PALMER1E: null
+  PALMER2: null
+  PALMER2A: null
+  PALMER2B: null
+  PALMER2E: null
+  PALMER3: null
+  PALMER3A: null
+  PALMER3B: null
+  PALMER3E: null
+  PALMER4: null
+  PALMER4A: null
+  PALMER4B: null
+  PALMER4E: null
+  PALMER5A: null
+  PALMER5B: null
+  PALMER5E: null
+  PALMER6A: null
+  PALMER6E: null
+  PALMER7A: null
+  PALMER7E: null
+  PALMER8A: null
+  PALMER8E: null
+  PENTDI: null
+  PFIT1LS: null
+  PFIT2LS: null
+  PFIT3LS: null
+  PFIT4LS: null
+  POWELLBC: null
+  POWERSUMB: null
+  PRICE3B: null
+  PRICE4B: null
+  PROBPENL: null
+  PSPDOC: null
+  QINGB: null
+  QR3DLS: null
+  QRTQUAD: null
+  QUDLIN: null
+  S368: null
+  SANTALS: null
+  SCOND1LS: null
+  SIM2BQP: null
+  SIMBQP: null
+  SINEALI: null
+  SPECAN: null
+  STRTCHDVB: null
+  TORSION1: null
+  TORSION2: null
+  TORSION3: null
+  TORSION4: null
+  TORSION5: null
+  TORSION6: null
+  TORSIONA: null
+  TORSIONB: null
+  TORSIONC: null
+  TORSIOND: null
+  TORSIONE: null
+  TORSIONF: null
+  TRIGON1B: null
+  TRIGON2B: null
+  WALL10: null
+  WALL100: null
+  WALL20: null
+  WALL50: null
+  WAYSEA1B: null
+  WAYSEA2B: null
+  WEEDS: null
+  YFIT: null
+solvers:
+  GenoSolver:
+    options:
+      max_iter: 100000
+#      verbose: 10
+      eps_pg: 0.00000001
+      eps_f: 0. #0000000000001
+  ScipySolver:
+    method: L-BFGS-B
+    options:
+      maxiter: 100000
+#      disp: 10
+      ftol: 0. #0000000000001
+      gtol: 0.00000001
+#      xtol: 0.0000000000001
+  GenoSolverC:
+    options:
+#      verbosity: 10
+      maxiter: 100000
+      tol: 0. #0000000000001
+  IpoptSolver:
+    options:
+      max_iter: 100000
+      tol: 0.00000001

@@ -1,0 +1,38 @@
+problems:
+sinlge_problems:
+  AIRCRFTB: null
+  BIGGS3: null
+  BIGGS5: null
+  BOX2: null
+  BRATU1D: null
+  CLPLATEA: null
+  CLPLATEB: null
+  CLPLATEC: null
+  DECONVU: null
+  DRCAV1LQ: null
+  DRCAV2LQ: null
+  DRCAV3LQ: null
+  LMINSURF: null
+  MINSURF: null
+  NLMSURF: null
+  ODC: null
+  RAYBENDL: null
+  RAYBENDS: null
+  SSC: null
+solvers:
+  GenoSolver:
+    options:
+      max_iter: 1000
+#      verbose: 10
+  ScipySolver:
+    method: L-BFGS-B
+    options:
+      maxiter: 1000
+#      disp: 10
+  GenoSolverC:
+    options:
+#      verbosity: 10
+      maxiter: 1000
+  IpoptSolver:
+    options:
+      max_iter: 1000

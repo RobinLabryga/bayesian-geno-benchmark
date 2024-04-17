@@ -1,0 +1,36 @@
+problems:
+  chebyqad:
+  cvxbqp1:
+  eg1:
+  eigena:
+  explin:
+  explin2:
+  hatflda:
+  logros:
+  mccormck:
+  mdhole:
+  obstclal:
+  obstclbl:
+  obstclbu:
+  probpenl:
+  qr3d:
+  qr3dbd:
+  qr3dls:
+  qudlin:
+  s368:
+  sim2bqp:
+  threepk:
+  yfit:
+solvers:
+  GenoSolver:
+    options:
+      max_iter: 1000
+#  ScipySolver:
+#    method: L-BFGS-B
+#    options:
+#      maxiter: 1000
+#      disp: 101
+#  ScipyBFGS:
+#    options:
+#      maxiter: 1000
+#      disp: 101

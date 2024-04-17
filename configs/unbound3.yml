@@ -1,0 +1,91 @@
+problems:
+  allinitu:
+  arglina:
+  arglinb:
+  arglinc:
+  arwhead:
+  bdexp:
+  beale:
+  brkmcc:
+  brownal:
+  brownbs:
+#  chnrosnb:
+  cliff:
+  cosine:
+  cube:
+  denschna:
+  denschnb:
+  denschnc:
+  denschnd:
+  denschne:
+  denschnf:
+  dixon3dq:
+  dqdrtic:
+#  dqrtic:
+  edensch:
+  eigenals:
+  eigenb:
+  eigenbls:
+  engval1:
+  engval2:
+#  errinros:
+  expfit:
+#  extrosnb:
+  fletcbv2:
+#  fletcbv3:
+#  fletchbv:
+#  fletchcr:
+#  genrose:
+#  growth:
+#  growthls:
+  hairy:
+#  heart6ls:
+#  heart8ls:
+  hilbertb:
+  himmelbb:
+  himmelbg:
+  himmelbh:
+  humps:
+#  jensmp:
+#  loghairy:
+#  maratosb:
+#  methanb8:
+#  methanl8:
+  mexhat:
+  nasty:
+  noncvxun:
+#  penalty2:
+#  pfit1:
+#  pfit1ls:
+#  pfit2:
+#  pfit2ls:
+#  pfit3:
+#  pfit3ls:
+#  pfit4:
+#  pfit4ls:
+  power:
+  quadratic:
+#  quartc:
+  rosenbr:
+#  scosine:
+#  sensors:
+  sineval:
+  sisser:
+  tointqor:
+  tridia:
+#  vardim:
+  yfitu:
+  zangwil2:
+solvers:
+  GenoSolver:
+    options:
+      max_iter: 1000
+  ScipySolver:
+    method: L-BFGS-B
+    options:
+      maxiter: 1000
+#      disp: 101
+#  ScipyBFGS:
+#    options:
+#      maxiter: 1000
+#      disp: 101

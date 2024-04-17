@@ -1,0 +1,13 @@
+numpy
+autograd
+jax
+jaxlib
+matplotlib
+ipykernel
+scipy
+pyyaml
+pip
+genosolver
+wget
+amplpy
+pycutest

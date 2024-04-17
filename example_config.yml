@@ -1,0 +1,23 @@
+### load problems by categories
+problems:
+  constraints: unconstrained
+  objective: quadratic sum of squares linear
+
+### load problems by name
+### UNCOMMENT TO USE
+#single_problems:
+#  ARGLINA:
+#  ARGLINB:
+
+### run all problems
+### UNCOMMENT TO USE
+#problems: all
+
+### load solvers
+solvers:
+  GenoSolver:
+    options:
+      max_iter: 1000
+  ScipySolver:
+    options:
+      maxiter: 1000
