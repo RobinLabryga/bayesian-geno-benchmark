@@ -5,13 +5,13 @@ problems:
 
 ### load problems by name
 ### UNCOMMENT TO USE
-single_problems:
- ARGLINA:
- ARGLINB:
+# single_problems:
+#  ARGLINA:
+#  ARGLINB:
 
 ### run all problems
 ### UNCOMMENT TO USE
-#problems: all
+# problems: all
 
 ### load solvers
 solvers:

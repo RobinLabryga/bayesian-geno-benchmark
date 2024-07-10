@@ -45,9 +45,9 @@ single_problems:
 #    CLUSTERLS: null
 #    COATING: null
 #    COOLHANSLS: null
-   COSINE: null
+   # COSINE: null
 #    CRAGGLVY: null
-   CUBE: null
+   # CUBE: null
 #    CURLY10: null
 #    CURLY20: null
 #    CURLY30: null
@@ -81,7 +81,7 @@ single_problems:
 #    DIXMAANO: null
 #    DIXMAANP: null
 #    DIXON3DQ: null
-#    DJTL: null
+   # DJTL: null
 #    DMN15102LS: null
 #    DMN15103LS: null
 #    DMN15332LS: null
@@ -129,10 +129,10 @@ single_problems:
 #    HATFLDD: null
 #    HATFLDE: null
 #    HATFLDFL: null
-#    HATFLDFLS: null
-#    HATFLDGLS: null
-#    HEART6LS: null
-#    HEART8LS: null
+   # HATFLDFLS: null
+   # HATFLDGLS: null
+   # HEART6LS: null
+   # HEART8LS: null
 #    HELIX: null
 #    HIELOW: null
    # HILBERTA: null
@@ -161,10 +161,10 @@ single_problems:
 #    LIARWHD: null
 #    LOGHAIRY: null
 #    LRA9A: null
-#    LRCOVTYPE: null
-#    LRIJCNN1: null
-#    LRW1A: null
-#    LRW8A: null
+   LRCOVTYPE: null
+   LRIJCNN1: null
+   LRW1A: null
+   LRW8A: null
 #    LSC1LS: null
 #    LSC2LS: null
    # LUKSAN11LS: null
@@ -282,13 +282,13 @@ single_problems:
    # WATSON: null
 #    WAYSEA1: null
 #    WAYSEA2: null
-   WOODS: null
+   # WOODS: null
 #    YATP1CLS: null
 #    YATP1LS: null
 #    YATP2CLS: null
 #    YATP2LS: null
 #    YFITU: null
-   ZANGWIL2: null
+   # ZANGWIL2: null
 solvers:
   GenoSolver:
     options:

@@ -4,3 +4,15 @@
 [submodule "bayesian-geno"]
 	path = bayesian-geno
 	url = https://github.com/RobinLabryga/bayesian-geno
+[submodule "CUTEst/ARCHDefs"]
+	path = CUTEst/ARCHDefs
+	url = https://github.com/ralna/ARCHDefs
+[submodule "CUTEst/SIFDecode"]
+	path = CUTEst/SIFDecode
+	url = https://github.com/ralna/SIFDecode
+[submodule "CUTEst/CUTEst"]
+	path = CUTEst/CUTEst
+	url = https://github.com/ralna/CUTEst
+[submodule "CUTEst/sif"]
+	path = CUTEst/sif
+	url = https://bitbucket.org/optrove/sif
