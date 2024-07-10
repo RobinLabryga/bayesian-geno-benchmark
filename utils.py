@@ -91,6 +91,9 @@ def save_results(
         results, metrics, f"./results/{result_dir}", barplots_cnt=barplots_cnt
     )
     plot_f_over_time(results, f"./results/{result_dir}", one_fig_pdf=one_fig_pdf)
+    plot_f_over_improvements(
+        results, f"./results/{result_dir}", one_fig_pdf=one_fig_pdf
+    )
     plot_solved_over_time(results, f"./results/{result_dir}")
     plot_metrics_pdf(results, metrics, f"./results/{result_dir}")
 
