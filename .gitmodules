@@ -1,0 +1,6 @@
+[submodule "genosolver"]
+	path = genosolver
+	url = https://github.com/slaue/genosolver
+[submodule "bayesian-geno"]
+	path = bayesian-geno
+	url = https://github.com/RobinLabryga/bayesian-geno

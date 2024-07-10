@@ -1,4 +1,4 @@
-# ML Benchmarks
+# Bayesian Geno Benchmarks
 
 Run
 

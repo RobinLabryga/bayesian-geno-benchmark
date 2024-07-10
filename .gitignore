@@ -1,0 +1,11 @@
+## VS-CODE ##
+.vscode
+.venv
+/pycutest_cache_holder
+*/pycutest_cache_holder
+*__pycache__
+
+## MAC ##
+.DS_Store
+
+results/
