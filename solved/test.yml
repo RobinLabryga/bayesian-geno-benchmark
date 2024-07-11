@@ -161,10 +161,10 @@ single_problems:
 #    LIARWHD: null
 #    LOGHAIRY: null
 #    LRA9A: null
-   LRCOVTYPE: null
-   LRIJCNN1: null
-   LRW1A: null
-   LRW8A: null
+   # LRCOVTYPE: null
+   # LRIJCNN1: null
+   # LRW1A: null
+   # LRW8A: null
 #    LSC1LS: null
 #    LSC2LS: null
    # LUKSAN11LS: null
@@ -258,7 +258,7 @@ single_problems:
 #    SROSENBR: null
 #    SSBRYBND: null
 #    SSCOSINE: null
-#    SSI: null
+   # SSI: null
 # #   STRATEC: null # -inf?
 #    STREG: null
 #    STRTCHDV: null
@@ -283,19 +283,19 @@ single_problems:
 #    WAYSEA1: null
 #    WAYSEA2: null
    # WOODS: null
-#    YATP1CLS: null
+   # YATP1CLS: null
 #    YATP1LS: null
 #    YATP2CLS: null
 #    YATP2LS: null
 #    YFITU: null
    # ZANGWIL2: null
 solvers:
-  GenoSolver:
-    options:
-      max_iter: 100000
-#      verbose: 10
-      eps_pg: 0.00000001
-      eps_f: 0. #0000000000001
+#   GenoSolver:
+#     options:
+#       max_iter: 100000
+# #      verbose: 10
+#       eps_pg: 0.00000001
+#       eps_f: 0. #0000000000001
   BayesianGenoSolver:
     options:
       max_iter: 100000
@@ -308,12 +308,3 @@ solvers:
       ftol: 0. #0000000000001
       gtol: 0.00000001
 #      xtol: 0.0000000000001
-#   GenoSolverC:
-#     options:
-#      verbosity: 10
-      # maxiter: 100000
-      # tol: 0. #0000000000001
-#   IpoptSolver:
-#     options:
-#       max_iter: 100000
-#       tol: 0.00000001
