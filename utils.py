@@ -91,9 +91,7 @@ def save_results(
         results, metrics, f"./results/{result_dir}", barplots_cnt=barplots_cnt
     )
     plot_f_over_time(results, f"./results/{result_dir}", one_fig_pdf=one_fig_pdf)
-    plot_f_over_improvements(
-        results, f"./results/{result_dir}", one_fig_pdf=one_fig_pdf
-    )
+    plot_f_over_feval(results, f"./results/{result_dir}", one_fig_pdf=one_fig_pdf)
     plot_solved_over_time(results, f"./results/{result_dir}")
     plot_metrics_pdf(results, metrics, f"./results/{result_dir}")
 
@@ -260,7 +258,7 @@ def plot_f_over_time(results: dict, result_dir: str, one_fig_pdf=True):
         plt.close()
 
 
-def plot_f_over_improvements(results: dict, result_dir: str, one_fig_pdf=True):
+def plot_f_over_feval(results: dict, result_dir: str, one_fig_pdf=True):
     num_problems = len(results)
     if one_fig_pdf:
         fig, axs = plt.subplots(
@@ -274,7 +272,7 @@ def plot_f_over_improvements(results: dict, result_dir: str, one_fig_pdf=True):
             ax = axs[0]
 
         ax[0].set_title(problem_name)
-        ax[0].set_xlabel("improvements")
+        ax[0].set_xlabel("f eval")
         ax[0].set_ylabel("f val")
         ax[0].set_yscale("symlog")
         legend = []
@@ -288,20 +286,18 @@ def plot_f_over_improvements(results: dict, result_dir: str, one_fig_pdf=True):
                     idxs.append(j)
                 mn = min(mn, r["fs"][j])
             ax[0].plot(
-                range(len(idxs)), np.array(r["fs"])[idxs], linewidth=0.5, marker="."
+                np.array(idxs) + 1, np.array(r["fs"])[idxs], linewidth=0.5, marker="."
             )
         ax[0].legend(legend)
         if not one_fig_pdf:
             if not os.path.exists(f"{result_dir}/{problem_name}"):
                 os.makedirs(f"{result_dir}/{problem_name}")
-            fig.savefig(
-                f"{result_dir}/{problem_name}/f_over_improvements.pdf", format="pdf"
-            )
+            fig.savefig(f"{result_dir}/{problem_name}/f_over_feval.pdf", format="pdf")
             plt.close()
     if one_fig_pdf:
         if not os.path.exists(result_dir):
             os.makedirs(result_dir)
-        fig.savefig(f"{result_dir}/f_over_improvements.pdf", format="pdf")
+        fig.savefig(f"{result_dir}/f_over_feval.pdf", format="pdf")
         plt.close()
 
 
