@@ -19,3 +19,16 @@ You can benchmark multiple optimization problems and solvers simultaneously. Plo
 To build the f, g, and H timing solver on your machine, download go to <https://portal.ampl.com/~dmg/netlib/ampl/> download solvers2.tgz and build fgh_timing_solver.c according to the instructions. You can also try using the built fgh_timing_solver, but I don't think it will work on any other machine.
 
 You also need to install AMPL on your system, but that's reasonably simple to do.
+
+## Linux
+
+Good run command is
+
+```
+export ARCHDEFS="$PWD"/CUTEst/ARCHDefs/
+export SIFDECODE="$PWD"/CUTEst/SIFDecode/
+export MASTSIF="$PWD"/CUTEst/sif/
+export CUTEST="$PWD"/CUTEst/CUTEst/
+export MYARCH="pc64.lnx.gfo"
+python3 main.py --config ./solved/test.yml --timeout 60 --single_fig_per_f_over_time --barplots_cnt 10
+```
