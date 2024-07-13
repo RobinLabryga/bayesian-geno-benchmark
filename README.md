@@ -30,5 +30,5 @@ export SIFDECODE="$PWD"/CUTEst/SIFDecode/
 export MASTSIF="$PWD"/CUTEst/sif/
 export CUTEST="$PWD"/CUTEst/CUTEst/
 export MYARCH="pc64.lnx.gfo"
-python3 main.py --config ./solved/test.yml --timeout 60 --single_fig_per_f_over_time --barplots_cnt 10
+nohup python3 main.py --config ./solved/test.yml --timeout 60 --single_fig_per_f_over_time --barplots_cnt 10
 ```
