@@ -300,6 +300,7 @@ solvers:
          max_iter: 100000
          max_ls: 60
          eps_pg: 0.00000001
+         # verbose: 10
    ScipySolver:
       method: L-BFGS-B
       options:
