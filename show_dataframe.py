@@ -14,6 +14,19 @@ if os.path.exists(os.path.join(HERE_TEST_PATH, './genosolver/')):
 else:
     raise ImportError('No genosolver folder')
 
+if os.path.exists(os.path.join(HERE_TEST_PATH, "./bayesian-geno/")):
+    sys.path.insert(0, os.path.join(HERE_TEST_PATH, "./bayesian-geno/"))
+
+    import bayesian_line_search.GPgenosolver
+
+    sys.path.pop(0)
+else:
+    print(HERE_TEST_PATH)
+    raise ImportError("No bayesian genosolver folder")
+
+TARGET_SOLVER = 'BayesianGenoSolver'
+OTHER_SOLVER = 'ScipySolver'
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Pickle helper.', add_help=False)
     parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS, help='For loading .pkl results of a run.')
@@ -34,6 +47,11 @@ if __name__ == '__main__':
             for key in keys:
                 Dc[key].append(dc[key] if key in dc else -1)
 
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', None) 
+    pd.set_option('display.max_colwidth', None)
+
     dframe = pd.DataFrame.from_dict(Dc)
     opt = dframe.groupby('task')['fun'].transform('min')
     dframe['opt'] = opt
@@ -53,9 +71,11 @@ if __name__ == '__main__':
     print('fun2 solved')
     resss2 = dframe.groupby('solver').agg({'eps2': (lambda x: sum(x<1e-4))})
     print(resss2)
-    bad = dframe[(dframe['solver'] == 'GenoSolver') & (dframe['eps2'] >=1e-4)]
-    extended_bad = dframe[dframe['task'].isin(bad['task']) & (dframe['best'] | (dframe['solver'] == 'GenoSolver'))]
+    bad = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['eps2'] >=1e-4)]
+    extended_bad = dframe[dframe['task'].isin(bad['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]
+    print('eps2 >= 1e-4:')
     print(bad[['task', 'message', 'fun2', 'pgnorm', 'eps2', 'local_mins_dist']])
+    print(f'eps2 >= 1e-4 compared to {OTHER_SOLVER}:')
     print(extended_bad[['task', 'solver', 'fun', 'fun2', 'pgnorm']])
 
     pg_rel_norm = dframe['pgnorm'] / (abs(dframe['fun2']) + 1)
@@ -63,14 +83,16 @@ if __name__ == '__main__':
     local_res = dframe.groupby('solver').agg({ 'rel_pgnorm': (lambda x: sum(x<1e-6)) })
     print('rel pgnorm solved')
     print(local_res)
-    pg_bad = dframe[(dframe['solver'] == 'GenoSolver') & (dframe['rel_pgnorm'] >= 1e-6)]
+    pg_bad = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['rel_pgnorm'] >= 1e-6)]
+    print('rel_pgnorm >= 1e-6')
     print(pg_bad[['task', 'message', 'fun2', 'pgnorm', 'rel_pgnorm', 'eps2', 'local_mins_dist']])
 
     local_and_global_opt = (dframe['eps2'] < 1e-4) | (dframe['rel_pgnorm'] < 1e-6)
     dframe['both_opt'] = local_and_global_opt
     local_and_global_res = dframe.groupby('solver').agg({ 'both_opt': (lambda x: sum(1*x)) })
     print(local_and_global_res)
-    bad_both = dframe[(dframe['solver'] == 'GenoSolver') & ~dframe['both_opt']]
+    bad_both = dframe[(dframe['solver'] == TARGET_SOLVER) & ~dframe['both_opt']]
+    print('eps2 >= 1e-4 and rel_pgnorm >= 1e-6')
     print(bad_both[['task', 'message', 'nit', 'fun2', 'pgnorm', 'rel_pgnorm', 'eps2', 'local_mins_dist']])
 
     dframe['fev'] = dframe.apply(lambda x: np.argmax((np.array(x['fs']) - x['opt2'])/(1. + abs(x['opt2'])) < 1e-4) if any((np.array(x['fs']) - x['opt2'])/(1. + abs(x['opt2'])) < 1e-4) else int(1e9), axis=1) + 1
@@ -83,7 +105,7 @@ if __name__ == '__main__':
     print('Fixed iterations')
     print(dframe[['task', 'solver', 'fun2', 'pgnorm', 'nfev', 'fev', 'pgev', 'nfev2']])
     
-    nfev_compare = dframe.groupby('task').filter(lambda x: x[x['solver'] == 'GenoSolver']['nfev2'].item() > x[x['solver'] == 'ScipySolver']['nfev2'].item())
+    nfev_compare = dframe.groupby('task').filter(lambda x: x[x['solver'] == TARGET_SOLVER]['nfev2'].item() > x[x['solver'] == OTHER_SOLVER]['nfev2'].item())
     print()
     print(nfev_compare)
 
@@ -94,7 +116,6 @@ if __name__ == '__main__':
 
     available_problems = sorted(available_problems)
     available_solvers = sorted(available_solvers)
-    pd.set_option('display.max_rows', None)
 
     if args.plot_again:
         metrics = ['nit', 'nfev', 'time']

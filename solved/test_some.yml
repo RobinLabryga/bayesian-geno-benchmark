@@ -2,13 +2,13 @@ problems:
 single_problems:
    # AKIVA: null # -inf or 0.611
    # ALLINITU: null
-   ARGLINA: null
+   # ARGLINA: null
    # ARGLINB: null
    # ARGLINC: null
    # ARGTRIGLS: null
    # ARWHEAD: null
    # BA-L16LS: null
-   BA-L1LS: null
+   # BA-L1LS: null
    # BA-L1SPLS: null
    # BA-L21LS: null
    # BA-L49LS: null
@@ -18,7 +18,7 @@ single_problems:
    # BDQRTIC: null
    # BEALE: null
    # BENNETT5LS: null
-   BIGGS6: null
+   # BIGGS6: null
    # BOX: null
    # BOX3: null
    # BOXBODLS: null
@@ -29,7 +29,7 @@ single_problems:
    # BROWNDEN: null
    # BROYDN3DLS: null
    # BROYDN7D: null
-   BROYDNBDLS: null
+   # BROYDNBDLS: null
    # BRYBND: null
    # CERI651ALS: null
    # CERI651BLS: null
@@ -39,11 +39,11 @@ single_problems:
    # CHAINWOO: null
    # CHNROSNB: null
    # CHNRSNBM: null
-   CHWIRUT1LS: null
+   # CHWIRUT1LS: null
    # CHWIRUT2LS: null
    # CLIFF: null
    # CLUSTERLS: null
-   COATING: null
+   # COATING: null
    # COOLHANSLS: null
    # COSINE: null
    # CRAGGLVY: null
@@ -52,7 +52,7 @@ single_problems:
    # CURLY20: null
    # CURLY30: null
    # CYCLOOCFLS: null
-   DANIWOODLS: null
+   # DANIWOODLS: null
    # DANWOODLS: null
    # DENSCHNA: null
    # DENSCHNB: null
@@ -62,7 +62,7 @@ single_problems:
    # DENSCHNF: null
    # DEVGLA1: null
    # DEVGLA2: null
-   DIAMON2DLS: null
+   # DIAMON2DLS: null
    # DIAMON3DLS: null
    # DIXMAANA1: null
    # DIXMAANB: null
@@ -72,7 +72,7 @@ single_problems:
    # DIXMAANF: null
    # DIXMAANG: null
    # DIXMAANH: null
-   DIXMAANI1: null
+   # DIXMAANI1: null
    # DIXMAANJ: null
    # DIXMAANK: null
    # DIXMAANL: null
@@ -81,7 +81,7 @@ single_problems:
    # DIXMAANO: null
    # DIXMAANP: null
    # DIXON3DQ: null
-   DJTL: null
+   # DJTL: null
    # DMN15102LS: null
    # DMN15103LS: null
    # DMN15332LS: null
@@ -90,14 +90,14 @@ single_problems:
    # DMN37143LS: null
    # DQDRTIC: null
    # DQRTIC: null
-   ECKERLE4LS: null
+   # ECKERLE4LS: null
    # EDENSCH: null
    # EG2: null
    # EGGCRATE: null
    # EIGENALS: null
    # EIGENBLS: null
    # EIGENCLS: null
-   ELATVIDU: null
+   # ELATVIDU: null
    # ENGVAL1: null
    # ENGVAL2: null
    # ENSOLS: null
@@ -106,7 +106,7 @@ single_problems:
    # EXP2: null
    # EXPFIT: null
    # EXTROSNB: null
-   FBRAIN3LS: null
+   # FBRAIN3LS: null
    # FLETBV3M: null
    # FLETCBV2: null
    # FLETCBV3: null
@@ -115,7 +115,7 @@ single_problems:
    # FMINSRF2: null
    # FMINSURF: null
    # FREUROTH: null
-   GAUSS1LS: null
+   # GAUSS1LS: null
    # GAUSS2LS: null
    # GAUSS3LS: null
    # GAUSSIAN: null
@@ -123,7 +123,7 @@ single_problems:
    # GENHUMPS: null
    # GENROSE: null
    # GROWTHLS: null
-   GULF: null
+   # GULF: null
    # HAHN1LS: null
    # HAIRY: null
    # HATFLDD: null
@@ -131,7 +131,7 @@ single_problems:
    # HATFLDFL: null
    # HATFLDFLS: null
    # HATFLDGLS: null
-   HEART6LS: null
+   # HEART6LS: null
    # HEART8LS: null
    # HELIX: null
    # HIELOW: null
@@ -140,7 +140,7 @@ single_problems:
    # HIMMELBB: null
    # HIMMELBCLS: null
    # HIMMELBF: null
-   HIMMELBG: null
+   # HIMMELBG: null
    # HIMMELBH: null
    # HUMPS: null
    # HYDC20LS: null
@@ -151,7 +151,7 @@ single_problems:
    # JENSMP: null
    # JIMACK: null
    # JUDGE: null
-   JUDGEB: null
+   # JUDGEB: null
    # KIRBY2LS: null
    # KOWOSB: null
    # KSSLS: null
@@ -160,7 +160,7 @@ single_problems:
    # LANCZOS3LS: null
    # LIARWHD: null
    # LOGHAIRY: null
-   LRA9A: null
+   # LRA9A: null
    # LRCOVTYPE: null
    # LRIJCNN1: null
    # LRW1A: null
@@ -169,7 +169,7 @@ single_problems:
    # LSC2LS: null
    # LUKSAN11LS: null
    # LUKSAN12LS: null
-   LUKSAN13LS: null
+   # LUKSAN13LS: null
    # LUKSAN14LS: null
    # LUKSAN15LS: null
    # LUKSAN16LS: null
@@ -181,20 +181,20 @@ single_problems:
    # METHANB8LS: null
    # METHANL8LS: null
    # MEXHAT: null
-   # MEYER3: null
-   MGH09LS: null
+   MEYER3: null
+   # MGH09LS: null
    # MGH10LS: null
    # MGH10SLS: null
    # MGH17LS: null
    # MISRA1ALS: null
-   MISRA1BLS: null
+   # MISRA1BLS: null
    # MISRA1CLS: null
    # MISRA1DLS: null
    # MNISTS0LS: null
    # MNISTS5LS: null
    # MODBEALE: null
    # MOREBV: null
-   MSQRTALS: null
+   # MSQRTALS: null
    # MSQRTBLS: null
    # MUONSINELS: null
    # NCB20: null
@@ -204,7 +204,7 @@ single_problems:
    # NONCVXUN: null
    # NONDIA: null
    # NONDQUAR: null
-   NONMSQRT: null
+   # NONMSQRT: null
    # OSBORNEA: null
    # OSBORNEB: null
    # OSCIGRAD: null
@@ -214,15 +214,15 @@ single_problems:
    # PALMER2C: null
    # PALMER3C: null
    # PALMER4C: null
-   PALMER5C: null
+   # PALMER5C: null
    # PALMER5D: null
    # PALMER6C: null
-   PALMER7C: null
+   # PALMER7C: null
    # PALMER8C: null
    # # PARKCH: null # -inf
    # PENALTY1: null
    # PENALTY2: null
-   PENALTY3: null
+   # PENALTY3: null
    # POWELLBSLS: null
    # POWELLSG: null
    # POWELLSQLS: null
@@ -230,75 +230,75 @@ single_problems:
    # POWERSUM: null
    # PRICE3: null
    # PRICE4: null
-   QING: null
+   # QING: null
    # QUARTC: null
    # RAT42LS: null
    # RAT43LS: null
    # RECIPELS: null
    # ROSENBR: null
-   ROSENBRTU: null
+   # ROSENBRTU: null
    # ROSZMAN1LS: null
-   S308: null
+   # S308: null
    # SBRYBND: null
    # SCHMVETT: null
-   SCOSINE: null # IPOpt terminate signal 9
+   # SCOSINE: null # IPOpt terminate signal 9
    # SCURLY10: null
    # SCURLY20: null
-   SCURLY30: null
+   # SCURLY30: null
    # SENSORS: null
    # SINEVAL: null
    # SINQUAD: null
-   SISSER: null
+   # SISSER: null
    # SNAIL: null
    # SPARSINE: null
    # SPARSQUR: null
    # SPIN2LS: null
    # SPINLS: null
-   SPMSRTLS: null
+   # SPMSRTLS: null
    # SROSENBR: null
    # SSBRYBND: null
    # SSCOSINE: null
    # SSI: null
    # # STRATEC: null # -inf?
    # STREG: null
-   STRTCHDV: null
+   # STRTCHDV: null
    # TESTQUAD: null
-   THURBERLS: null
+   # THURBERLS: null
    # TOINTGOR: null
    # TOINTGSS: null
-   TOINTPSP: null
+   # TOINTPSP: null
    # TOINTQOR: null
    # TQUARTIC: null
    # TRIDIA: null
-   TRIGON1: null
+   # TRIGON1: null
    # TRIGON2: null
    # VANDANMSLS: null
    # VARDIM: null
    # VAREIGVL: null
    # VESUVIALS: null
-   VESUVIOLS: null
+   # VESUVIOLS: null
    # VESUVIOULS: null
    # VIBRBEAM: null
    # WATSON: null
    # WAYSEA1: null
    # WAYSEA2: null
-   WOODS: null
+   # WOODS: null
    # YATP1CLS: null
-   YATP1LS: null
+   # YATP1LS: null
    # YATP2CLS: null
    # YATP2LS: null
    # YFITU: null
-   ZANGWIL2: null
+   # ZANGWIL2: null
 solvers:
    #   GenoSolver:
    #  options:
-   #    max_iter: 100000
    #    # verbose: 10
    #    eps_pg: 0.00000001
    #    eps_f: 0. #0000000000001
    BayesianGenoSolver:
       options:
          max_iter: 100000
+         max_ls: 60
          eps_pg: 0.00000001
    ScipySolver:
       method: L-BFGS-B
