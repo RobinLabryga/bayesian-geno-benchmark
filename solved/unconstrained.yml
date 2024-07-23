@@ -299,7 +299,7 @@ solvers:
    BayesianGenoSolver:
       options:
          max_iter: 100000
-         max_ls: 60
+         max_ls: 50
          eps_pg: 0.00000001
    ScipySolver:
       method: L-BFGS-B

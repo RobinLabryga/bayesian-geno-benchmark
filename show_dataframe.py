@@ -65,17 +65,20 @@ if __name__ == '__main__':
     dframe['(f-opt)/(abs(opt)+1)'] = successes
     dframe['eps2'] = dframe.groupby('task')['fun2'].transform(lambda x: (x - x.min()) / (abs(x.min()) + 1))
     print(dframe)
-    print('fun solved')
+    print('fun solved:')
     resss = dframe.groupby('solver').agg({'(f-opt)/(abs(opt)+1)': (lambda x: sum(x<1e-4))})
     print(resss)
-    print('fun2 solved')
+    bad_f = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['(f-opt)/(abs(opt)+1)'] >= 1e-4)]
+    print('(f-opt)/(abs(opt)+1) >= 1e-4:')
+    print(bad_f[['task', 'message', 'fun2', '(f-opt)/(abs(opt)+1)', 'pgnorm', 'eps2']])
+    print('eps2 solved:')
     resss2 = dframe.groupby('solver').agg({'eps2': (lambda x: sum(x<1e-4))})
     print(resss2)
     bad = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['eps2'] >=1e-4)]
     extended_bad = dframe[dframe['task'].isin(bad['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]
     print('eps2 >= 1e-4:')
     print(bad[['task', 'message', 'fun2', 'pgnorm', 'eps2', 'local_mins_dist']])
-    print(f'eps2 >= 1e-4 compared to {OTHER_SOLVER}:')
+    print(f'eps2 >= 1e-4 compared to best:')
     print(extended_bad[['task', 'solver', 'fun', 'fun2', 'pgnorm']])
 
     pg_rel_norm = dframe['pgnorm'] / (abs(dframe['fun2']) + 1)
@@ -84,8 +87,11 @@ if __name__ == '__main__':
     print('rel pgnorm solved')
     print(local_res)
     pg_bad = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['rel_pgnorm'] >= 1e-6)]
+    extended_pg_bad = dframe[dframe['task'].isin(pg_bad['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]
     print('rel_pgnorm >= 1e-6')
     print(pg_bad[['task', 'message', 'fun2', 'pgnorm', 'rel_pgnorm', 'eps2', 'local_mins_dist']])
+    print('rel_pgnorm >= 1e-6 compared to best')
+    print(extended_pg_bad[['task', 'solver', 'message', 'fun', 'rel_pgnorm', '(f-opt)/(abs(opt)+1)']])
 
     local_and_global_opt = (dframe['eps2'] < 1e-4) | (dframe['rel_pgnorm'] < 1e-6)
     dframe['both_opt'] = local_and_global_opt

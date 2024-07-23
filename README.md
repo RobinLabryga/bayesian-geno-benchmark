@@ -30,5 +30,11 @@ export SIFDECODE="$PWD"/CUTEst/SIFDecode/
 export MASTSIF="$PWD"/CUTEst/sif/
 export CUTEST="$PWD"/CUTEst/CUTEst/
 export MYARCH="pc64.lnx.gfo"
-nohup python3 main.py --config ./solved/unconstrained.yml --timeout 60 --single_fig_per_f_over_time --barplots_cnt 10
+nohup python3 main.py --config ./solved/unconstrained.yml --timeout 120 --single_fig_per_f_over_time --barplots_cnt 10
+```
+
+See Dataframe via
+
+```
+nohup python3 show_dataframe.py -f ./results/.../results.pkl
 ```
