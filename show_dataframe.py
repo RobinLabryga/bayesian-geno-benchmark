@@ -30,22 +30,24 @@ OTHER_SOLVER = 'ScipySolver'
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Pickle helper.', add_help=False)
     parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS, help='For loading .pkl results of a run.')
-    parser.add_argument('-f', '--file', type=str, default=max(glob.glob('./results/*/results.pkl'), key=os.path.getctime), help='Result to load.')
+    parser.add_argument('-f', '--file', nargs='+', type=str, default=max(glob.glob('./results/*/results.pkl'), key=os.path.getctime), help='Results to load.')
     parser.add_argument('--single_fig_per_f_over_time', action='store_true', help='Save one f_over_time plot per file.')
     parser.add_argument('--barplots_cnt', type=int, default=-1, help='Number of barplots per pdf. -1 means all.')
     parser.add_argument('--plot_again', action='store_true', help='Plot again like main.py does')
     args = parser.parse_args()
 
-    results = load_results(args.file)
+    all_results = [load_results(f) for f in args.file]
 
     keys = [ 'x', 'x_new', 'fun', 'fun2', 'nit', 'nfev', 'status', 'success', 'message', 'time', 'pgnorm', 'fs', 'bounds_violated', 'pgs' ]
     Dc = defaultdict(list)
-    for (task, res) in results.items():
-        for (nem, dc) in res.items():
-            Dc['solver'].append(nem)
-            Dc['task'].append(task)
-            for key in keys:
-                Dc[key].append(dc[key] if key in dc else -1)
+    for results in all_results:
+        for (task, res) in results.items():
+            for (nem, dc) in res.items():
+                Dc['solver'].append(nem)
+                Dc['task'].append(task)
+                for key in keys:
+                    Dc[key].append(dc[key] if key in dc else -1)
+    
 
     pd.set_option('display.max_rows', None)
     pd.set_option('display.max_columns', None)

@@ -36,5 +36,5 @@ nohup python3 main.py --config ./solved/unconstrained.yml --timeout 120 --single
 See Dataframe via
 
 ```
-nohup python3 show_dataframe.py -f ./results/.../results.pkl
+nohup python3 show_dataframe.py -f ./results/res1/results.pkl ./results/res2/results.pkl --single_fig_per_f_over_time --barplots_cnt 10
 ```
