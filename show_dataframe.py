@@ -47,14 +47,13 @@ if __name__ == '__main__':
                 Dc['task'].append(task)
                 for key in keys:
                     Dc[key].append(dc[key] if key in dc else -1)
-    
 
     pd.set_option('display.max_rows', None)
     pd.set_option('display.max_columns', None)
     pd.set_option('display.width', None) 
     pd.set_option('display.max_colwidth', None)
 
-    dframe = pd.DataFrame.from_dict(Dc)
+    dframe = pd.DataFrame.from_dict(Dc).sort_values(['task', 'solver'])
     opt = dframe.groupby('task')['fun'].transform('min')
     dframe['opt'] = opt
     dframe['opt2'] = dframe.groupby('task')['fun2'].transform('min')
@@ -126,5 +125,10 @@ if __name__ == '__main__':
     available_solvers = sorted(available_solvers)
 
     if args.plot_again:
+        results = defaultdict(dict)
+        for result in all_results:
+            for (task, res) in result.items():
+                for (nem, dc) in res.items():
+                    results[task][nem] = dc
         metrics = ['nit', 'nfev', 'time']
         save_results(results, metrics, {}, {}, one_fig_pdf=(not args.single_fig_per_f_over_time), barplots_cnt=args.barplots_cnt) 

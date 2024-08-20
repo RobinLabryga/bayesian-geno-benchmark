@@ -301,11 +301,11 @@ solvers:
          max_iter: 100000
          max_ls: 50
          eps_pg: 0.00000001
-   ScipySolver:
-      method: L-BFGS-B
-      options:
-         maxiter: 100000
-         #   disp: 10
-         ftol: 0. #0000000000001
-         gtol: 0.00000001
-      #   xtol: 0.0000000000001
+   # ScipySolver:
+   #    method: L-BFGS-B
+   #    options:
+   #       maxiter: 100000
+   #       #   disp: 10
+   #       ftol: 0. #0000000000001
+   #       gtol: 0.00000001
+   #    #   xtol: 0.0000000000001
