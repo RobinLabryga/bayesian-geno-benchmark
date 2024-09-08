@@ -66,15 +66,19 @@ if __name__ == '__main__':
     dframe['(f-opt)/(abs(opt)+1)'] = successes
     dframe['eps2'] = dframe.groupby('task')['fun2'].transform(lambda x: (x - x.min()) / (abs(x.min()) + 1))
     print(dframe)
+
     print('fun solved:')
     resss = dframe.groupby('solver').agg({'(f-opt)/(abs(opt)+1)': (lambda x: sum(x<1e-4))})
     print(resss)
+
     bad_f = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['(f-opt)/(abs(opt)+1)'] >= 1e-4)]
     print('(f-opt)/(abs(opt)+1) >= 1e-4:')
     print(bad_f[['task', 'message', 'fun2', '(f-opt)/(abs(opt)+1)', 'pgnorm', 'eps2']])
+
     print('eps2 solved:')
     resss2 = dframe.groupby('solver').agg({'eps2': (lambda x: sum(x<1e-4))})
     print(resss2)
+
     bad = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['eps2'] >=1e-4)]
     extended_bad = dframe[dframe['task'].isin(bad['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]
     print('eps2 >= 1e-4:')
@@ -87,12 +91,44 @@ if __name__ == '__main__':
     local_res = dframe.groupby('solver').agg({ 'rel_pgnorm': (lambda x: sum(x<1e-6)) })
     print('rel pgnorm solved')
     print(local_res)
+
     pg_bad = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['rel_pgnorm'] >= 1e-6)]
     extended_pg_bad = dframe[dframe['task'].isin(pg_bad['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]
     print('rel_pgnorm >= 1e-6')
     print(pg_bad[['task', 'message', 'fun2', 'pgnorm', 'rel_pgnorm', 'eps2', 'local_mins_dist']])
     print('rel_pgnorm >= 1e-6 compared to best')
     print(extended_pg_bad[['task', 'solver', 'message', 'fun', 'rel_pgnorm', '(f-opt)/(abs(opt)+1)']])
+
+    dframe['f_or_g_opt'] = (dframe['(f-opt)/(abs(opt)+1)'] < 1e-4) | (dframe['rel_pgnorm'] < 1e-6)
+    print(dframe.groupby('solver').agg({ 'f_or_g_opt': (lambda x: sum(1*x)) }))
+    bad_both = dframe[(dframe['solver'] == TARGET_SOLVER) & ~dframe['f_or_g_opt']]
+    print('(f-opt)/(abs(opt)+1) >= 1e-4 and rel_pgnorm >= 1e-6')
+    print(bad_both[['task', 'message', 'nit', 'fun2', 'pgnorm', 'rel_pgnorm', 'eps2', 'local_mins_dist']])
+    extended_bad_both = dframe[dframe['task'].isin(bad_both['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]
+    print('(f-opt)/(abs(opt)+1) >= 1e-4 and rel_pgnorm >= 1e-6 compared to best')
+    print(extended_bad_both[['task', 'solver', 'message', 'fun', 'rel_pgnorm', '(f-opt)/(abs(opt)+1)']])
+
+
+    print('Converge not in g not in f')
+    dframe['not_f_not_g'] = (dframe['(f-opt)/(abs(opt)+1)'] >= 1e-4) & (dframe['rel_pgnorm'] >= 1e-6)
+    print(dframe.groupby('solver').agg({ 'not_f_not_g': (lambda x: sum(1*x)) }))
+    problems = dframe[(dframe['solver'] == TARGET_SOLVER) & dframe['not_f_not_g']]
+    extended_problems = dframe[dframe['task'].isin(problems['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]
+    print(extended_problems[['task', 'solver', 'message', 'fun', 'rel_pgnorm', '(f-opt)/(abs(opt)+1)']])
+
+    print('Converge in f not in g')
+    dframe['f_not_g'] = (dframe['(f-opt)/(abs(opt)+1)'] < 1e-4) & (dframe['rel_pgnorm'] >= 1e-6)
+    print(dframe.groupby('solver').agg({ 'f_not_g': (lambda x: sum(1*x)) }))
+    problems = dframe[(dframe['solver'] == TARGET_SOLVER) & dframe['f_not_g']]
+    extended_problems = dframe[dframe['task'].isin(problems['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]
+    print(extended_problems[['task', 'solver', 'message', 'fun', 'rel_pgnorm', '(f-opt)/(abs(opt)+1)']])
+
+    print('Converge in g not in f')
+    dframe['g_not_f'] = (dframe['(f-opt)/(abs(opt)+1)'] >= 1e-4) & (dframe['rel_pgnorm'] < 1e-6)
+    print(dframe.groupby('solver').agg({ 'g_not_f': (lambda x: sum(1*x)) }))
+    problems = dframe[(dframe['solver'] == TARGET_SOLVER) & dframe['g_not_f']]
+    extended_problems = dframe[dframe['task'].isin(problems['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]
+    print(extended_problems[['task', 'solver', 'message', 'fun', 'rel_pgnorm', '(f-opt)/(abs(opt)+1)']])
 
     local_and_global_opt = (dframe['eps2'] < 1e-4) | (dframe['rel_pgnorm'] < 1e-6)
     dframe['both_opt'] = local_and_global_opt

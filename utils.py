@@ -92,6 +92,7 @@ def save_results(
     )
     plot_f_over_time(results, f"./results/{result_dir}", one_fig_pdf=one_fig_pdf)
     plot_f_over_feval(results, f"./results/{result_dir}", one_fig_pdf=one_fig_pdf)
+    plot_normalized_feval(results, f"./results/{result_dir}")
     plot_solved_over_time(results, f"./results/{result_dir}")
     plot_metrics_pdf(results, metrics, f"./results/{result_dir}")
 
@@ -282,7 +283,7 @@ def plot_f_over_feval(results: dict, result_dir: str, one_fig_pdf=True):
             legend.append(s)
             idxs, mn = [0], r["fs"][0]
             for j in range(1, len(r["fs"])):
-                if r["fs"][j] <= mn:
+                if r["fs"][j] < mn:
                     idxs.append(j)
                 mn = min(mn, r["fs"][j])
             ax[0].plot(
@@ -299,6 +300,64 @@ def plot_f_over_feval(results: dict, result_dir: str, one_fig_pdf=True):
             os.makedirs(result_dir)
         fig.savefig(f"{result_dir}/f_over_feval.pdf", format="pdf")
         plt.close()
+
+def plot_normalized_feval(results: dict, result_dir: str):
+    fig, ax = plt.subplots(1, 1)
+    ax.set_title("f evals")
+    ax.set_xlabel("norm f eval")
+    ax.set_ylabel("norm f val")
+    # ax.set_xscale("log")
+
+    solver_lines = dict()
+
+    for problem_name, problems_results in results.items():
+        feval_min = None
+        f_best = None
+        for solver_name, solver_result in problems_results.items():
+            feval_min = min(feval_min, len(solver_result['fs'])) if feval_min is not None else len(solver_result['fs'])
+            f_best = min(f_best, min(solver_result['fs'])) if f_best is not None else min(solver_result['fs'])
+
+        for solver_name, solver_result in problems_results.items():
+            if solver_name not in solver_lines:
+                solver_lines[solver_name] = dict()
+            solver_lines[solver_name][problem_name] = dict()
+            fs = solver_result['fs']
+
+            best_fs = list()
+            best_f = fs[0]
+            for f in fs:
+                best_f = min(best_f, f)
+                best_fs.append(best_f)
+
+            f_max = best_fs[0]
+
+            solver_lines[solver_name][problem_name]['normalized_fs'] = [(f - f_best) / (f_max - f_best) for f in best_fs]
+            solver_lines[solver_name][problem_name]['normalized_fevals'] = [feval / feval_min for feval in range(len(fs))]
+
+    for solver_name, solver_line in solver_lines.items():
+        f_evals = np.linspace(0, 4, 400)
+        fs = [list() for _ in f_evals]
+        for problem_name, problem_line in solver_line.items():
+            normalized_fs = problem_line['normalized_fs']
+            normalized_fevals = np.array(problem_line['normalized_fevals'])
+            for i in range(len(f_evals)):
+                f_eval_index = normalized_fevals.searchsorted(f_evals[i], 'right') - 1
+                fs[i].append(normalized_fs[f_eval_index])
+
+        f_min = [min(f) for f in fs]
+        f_max = [max(f) for f in fs]
+        f_mean = np.array([np.mean(f) for f in fs])
+        f_std = np.array([np.std(f, mean=mean) for f, mean in zip(fs, f_mean)])
+
+        ax.plot(f_evals, f_mean, label=solver_name)
+        ax.fill_between(f_evals, np.maximum(f_min, f_mean - f_std), np.minimum(f_max, f_mean + f_std), alpha=0.25)
+
+    ax.legend()
+
+    if not os.path.exists(result_dir):
+        os.makedirs(result_dir)
+    fig.savefig(f"{result_dir}/feval_normalized.pdf", format="pdf")
+    plt.close()
 
 
 def plot_solved_over_time(results: dict, result_dir: str, max_time=1000):
