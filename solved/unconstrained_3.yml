@@ -1,0 +1,119 @@
+problems:
+single_problems:
+   # MODBEALE: null
+   MOREBV: null
+   MSQRTALS: null
+   MSQRTBLS: null
+   MUONSINELS: null
+   NCB20: null
+   NCB20B: null
+   NELSONLS: null
+   NONCVXU2: null
+   NONCVXUN: null
+   NONDIA: null
+   NONDQUAR: null
+   NONMSQRT: null
+   OSBORNEA: null
+   OSBORNEB: null
+   OSCIGRAD: null
+   OSCIPATH: null
+   PALMER1C: null
+   PALMER1D: null
+   PALMER2C: null
+   PALMER3C: null
+   PALMER4C: null
+   PALMER5C: null
+   PALMER5D: null
+   PALMER6C: null
+   PALMER7C: null
+   PALMER8C: null
+   #   PARKCH: null # -inf
+   PENALTY1: null
+   PENALTY2: null
+   PENALTY3: null
+   POWELLBSLS: null
+   POWELLSG: null
+   POWELLSQLS: null
+   POWER: null
+   POWERSUM: null
+   PRICE3: null
+   PRICE4: null
+   QING: null
+   QUARTC: null
+   RAT42LS: null
+   RAT43LS: null
+   RECIPELS: null
+   ROSENBR: null
+   ROSENBRTU: null
+   ROSZMAN1LS: null
+   S308: null
+   SBRYBND: null
+   SCHMVETT: null
+   #   SCOSINE: null # IPOpt terminate signal 9
+   SCURLY10: null
+   SCURLY20: null
+   SCURLY30: null
+   SENSORS: null
+   SINEVAL: null
+   SINQUAD: null
+   SISSER: null
+   SNAIL: null
+   SPARSINE: null
+   SPARSQUR: null
+   SPIN2LS: null
+   SPINLS: null
+   SPMSRTLS: null
+   SROSENBR: null
+   SSBRYBND: null
+   SSCOSINE: null
+   SSI: null
+   #   STRATEC: null # -inf?
+   STREG: null
+   STRTCHDV: null
+   TESTQUAD: null
+   THURBERLS: null
+   TOINTGOR: null
+   TOINTGSS: null
+   TOINTPSP: null
+   TOINTQOR: null
+   TQUARTIC: null
+   TRIDIA: null
+   TRIGON1: null
+   TRIGON2: null
+   VANDANMSLS: null
+   VARDIM: null
+   VAREIGVL: null
+   VESUVIALS: null
+   VESUVIOLS: null
+   VESUVIOULS: null
+   VIBRBEAM: null
+   WATSON: null
+   WAYSEA1: null
+   WAYSEA2: null
+   WOODS: null
+   YATP1CLS: null
+   YATP1LS: null
+   YATP2CLS: null
+   YATP2LS: null
+   YFITU: null
+   ZANGWIL2: null
+solvers:
+   # GenoSolver:
+   #  options:
+   #    max_iter: 100000
+   #    # verbose: 0
+   #    eps_pg: 0.00000001
+   #    eps_f: 0. #0000000000001
+   BayesianGenoSolver:
+      options:
+         max_iter: 100000
+         max_ls: 50
+         eps_pg: 0.00000001
+   # ScipySolver:
+   #    method: L-BFGS-B
+   #    options:
+   #       maxiter: 100000
+   #       #   disp: 10
+   #       ftol: 0. #0000000000001
+   #       gtol: 0.00000001
+   #    #   xtol: 0.0000000000001

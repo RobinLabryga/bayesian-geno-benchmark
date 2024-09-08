@@ -290,10 +290,10 @@ single_problems:
    YFITU: null
    ZANGWIL2: null
 solvers:
-   #   GenoSolver:
+   # GenoSolver:
    #  options:
    #    max_iter: 100000
-   #    # verbose: 10
+   #    # verbose: 0
    #    eps_pg: 0.00000001
    #    eps_f: 0. #0000000000001
    BayesianGenoSolver:
