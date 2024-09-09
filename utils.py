@@ -3,6 +3,7 @@ import re
 import datetime
 import pickle
 import yaml
+import csv
 import importlib
 from typing import List
 
@@ -334,6 +335,9 @@ def plot_normalized_feval(results: dict, result_dir: str):
             solver_lines[solver_name][problem_name]['normalized_fs'] = [(f - f_best) / (f_max - f_best) for f in best_fs]
             solver_lines[solver_name][problem_name]['normalized_fevals'] = [feval / feval_min for feval in range(len(fs))]
 
+    if not os.path.exists(result_dir):
+        os.makedirs(result_dir)
+
     for solver_name, solver_line in solver_lines.items():
         f_evals = np.linspace(0, 4, 400)
         fs = [list() for _ in f_evals]
@@ -348,14 +352,20 @@ def plot_normalized_feval(results: dict, result_dir: str):
         f_max = [max(f) for f in fs]
         f_mean = np.array([np.mean(f) for f in fs])
         f_std = np.array([np.std(f, mean=mean) for f, mean in zip(fs, f_mean)])
+        std_lower = np.maximum(f_min, f_mean - f_std)
+        std_upper = np.minimum(f_max, f_mean + f_std)
 
         ax.plot(f_evals, f_mean, label=solver_name)
-        ax.fill_between(f_evals, np.maximum(f_min, f_mean - f_std), np.minimum(f_max, f_mean + f_std), alpha=0.25)
+        ax.fill_between(f_evals, std_lower, std_upper, alpha=0.25)
+
+        with open(f"{result_dir}/feval_normalized{solver_name}.csv", 'w') as f:
+            writer = csv.writer(f)
+            writer.writerow(("feval", "mean", "std_lower", "std_upper"))
+            for row in zip(f_evals, f_mean, std_lower, std_upper):
+                writer.writerow(row)
 
     ax.legend()
 
-    if not os.path.exists(result_dir):
-        os.makedirs(result_dir)
     fig.savefig(f"{result_dir}/feval_normalized.pdf", format="pdf")
     plt.close()
 
