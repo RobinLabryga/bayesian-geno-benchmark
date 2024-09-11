@@ -4,6 +4,7 @@ import datetime
 import pickle
 import yaml
 import csv
+import json
 import importlib
 from typing import List
 
@@ -96,6 +97,7 @@ def save_results(
     plot_normalized_feval(results, f"./results/{result_dir}")
     plot_solved_over_time(results, f"./results/{result_dir}")
     plot_metrics_pdf(results, metrics, f"./results/{result_dir}")
+    solver_times_to_json(results, f"./results/{result_dir}")
 
     result_dict = dict()
     result_dict["solvers"] = solver_dict
@@ -301,6 +303,18 @@ def plot_f_over_feval(results: dict, result_dir: str, one_fig_pdf=True):
             os.makedirs(result_dir)
         fig.savefig(f"{result_dir}/f_over_feval.pdf", format="pdf")
         plt.close()
+
+def solver_times_to_json(results: dict, result_dir:str):
+    output = dict()
+    for problem_name, problems_results in results.items():
+        for solver_name, solver_result in problems_results.items():
+            if solver_name not in output:
+                output[solver_name] = dict()
+            output[solver_name][problem_name] = solver_result['time'] 
+
+    for solver_name, out in output.items():
+        with open(f"{result_dir}/{solver_name}_times.json", 'w') as f:
+            json.dump(out, f, sort_keys=True, indent=4)
 
 def plot_normalized_feval(results: dict, result_dir: str):
     fig, ax = plt.subplots(1, 1)
