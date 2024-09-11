@@ -310,7 +310,9 @@ def solver_times_to_json(results: dict, result_dir:str):
         for solver_name, solver_result in problems_results.items():
             if solver_name not in output:
                 output[solver_name] = dict()
-            output[solver_name][problem_name] = solver_result['time'] 
+            output[solver_name][problem_name] = dict()
+            output[solver_name][problem_name]['time'] = solver_result['time']
+            output[solver_name][problem_name]['nfev'] = len(solver_result['fs'])
 
     for solver_name, out in output.items():
         with open(f"{result_dir}/{solver_name}_times.json", 'w') as f:
