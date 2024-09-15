@@ -331,8 +331,14 @@ def plot_normalized_feval(results: dict, result_dir: str):
         feval_min = None
         f_best = None
         for solver_name, solver_result in problems_results.items():
-            feval_min = min(feval_min, len(solver_result['fs'])) if feval_min is not None else len(solver_result['fs'])
-            f_best = min(f_best, min(solver_result['fs'])) if f_best is not None else min(solver_result['fs'])
+            min_index = np.nanargmin(solver_result['fs'])
+            min_value = solver_result['fs'][min_index]
+            if f_best is None:
+                feval_min = min_index + 1
+                f_best = min_value
+            elif min_value <= f_best:
+                f_best = min_value
+                feval_min = min(feval_min, min_index + 1)
 
         for solver_name, solver_result in problems_results.items():
             if solver_name not in solver_lines:
