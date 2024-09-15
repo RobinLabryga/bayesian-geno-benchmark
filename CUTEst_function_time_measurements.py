@@ -27,7 +27,7 @@ if __name__ == '__main__':
             start = time()
             f, g = problem.obj(problem.x0, gradient=True)
             samples.append(time() - start)
-            x = x + rng.uniform(1.0, 8.0) * g
+            x = x + rng.uniform() * g
 
         mean = np.mean(samples)
 
