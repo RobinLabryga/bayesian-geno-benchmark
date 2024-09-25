@@ -1,0 +1,63 @@
+problems:
+single_problems:
+   BA-L16LS: null
+   BA-L21LS: null
+   BA-L49LS: null
+   BA-L52LS: null
+   BA-L73LS: null
+   CERI651ALS: null
+   CERI651BLS: null
+   CERI651CLS: null
+   CERI651DLS: null
+   CERI651ELS: null
+   CYCLOOCFLS: null
+   DIAMON3DLS: null
+   DJTL: null
+   DMN15103LS: null
+   DMN37142LS: null
+   HAHN1LS: null
+   HEART6LS: null
+   HYDCAR6LS: null
+   KIRBY2LS: null
+   LRCOVTYPE: null
+   METHANL8LS: null
+   MEYER3: null
+   MGH10LS: null
+   MGH10SLS: null
+   MGH17LS: null
+   MISRA1ALS: null
+   MISRA1BLS: null
+   MISRA1CLS: null
+   MISRA1DLS: null
+   MODBEALE: null
+   NELSONLS: null
+   PALMER2C: null
+   SBRYBND: null
+   SCURLY10: null
+   SCURLY20: null
+   SCURLY30: null
+   SSCOSINE: null
+   VESUVIALS: null
+   VESUVIOLS: null
+   VIBRBEAM: null
+solvers:
+   # GenoSolver:
+   #  options:
+   #    max_iter: 100000
+   #    # verbose: 0
+   #    eps_pg: 0.00000001
+   #    eps_f: 0. #0000000000001
+   BayesianGenoSolver:
+      options:
+         max_iter: 100000
+         max_ls: 50
+         eps_pg: 0.00000001
+         # max_sample_count: 5
+   # ScipySolver:
+   #    method: L-BFGS-B
+   #    options:
+   #       maxiter: 100000
+   #       #   disp: 10
+   #       ftol: 0. #0000000000001
+   #       gtol: 0.00000001
+   #    #   xtol: 0.0000000000001

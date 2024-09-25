@@ -30,7 +30,7 @@ export SIFDECODE="$PWD"/CUTEst/SIFDecode/
 export MASTSIF="$PWD"/CUTEst/sif/
 export CUTEST="$PWD"/CUTEst/CUTEst/
 export MYARCH="pc64.lnx.gfo"
-nohup python3 main.py --config ./solved/unconstrained.yml --timeout 120
+nohup python3 main.py --config ./solved/unconstrained.yml --timeout 120 --result_dir name
 ```
 
 See Dataframe via

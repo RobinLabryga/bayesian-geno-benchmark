@@ -70,6 +70,7 @@ if __name__ == '__main__':
     print('fun solved:')
     resss = dframe.groupby('solver').agg({'(f-opt)/(abs(opt)+1)': (lambda x: sum(x<1e-4))})
     print(resss)
+    print(dframe[dframe['(f-opt)/(abs(opt)+1)'] < 1e-4].groupby('solver')['task'].apply(list))
 
     bad_f = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['(f-opt)/(abs(opt)+1)'] >= 1e-4)]
     print('(f-opt)/(abs(opt)+1) >= 1e-4:')
@@ -91,6 +92,7 @@ if __name__ == '__main__':
     local_res = dframe.groupby('solver').agg({ 'rel_pgnorm': (lambda x: sum(x<1e-6)) })
     print('rel pgnorm solved')
     print(local_res)
+    print(dframe[dframe['rel_pgnorm'] < 1e-6].groupby('solver')['task'].apply(list))
 
     pg_bad = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['rel_pgnorm'] >= 1e-6)]
     extended_pg_bad = dframe[dframe['task'].isin(pg_bad['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]

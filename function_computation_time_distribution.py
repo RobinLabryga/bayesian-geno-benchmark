@@ -25,7 +25,6 @@ if __name__ == "__main__":
         "-s",
         type=str,
         nargs="+",
-        required=True,
         help="The json file of the solver times and fevals.",
     )
     args = parser.parse_args()
@@ -35,7 +34,14 @@ if __name__ == "__main__":
     with open(args.functionfile, "r") as f:
         function_times = json.load(f)
 
-    for solverfile in args.solverfiles:
+    function_mean_times = [
+        problem_info["mean"] for problem_name, problem_info in function_times.items()
+    ]
+    print(
+        f"Overall problem mean function time mean: {np.mean(function_mean_times) * 1000:.2f}, std:{np.std(function_mean_times) * 1000:.2f}, min: {min(function_mean_times) * 1000:.2f}, max: {max(function_mean_times) * 1000:.2f}"
+    )
+
+    for solverfile in args.solverfiles if args.solverfiles is not None else list():
         print(f"{solverfile}:")
 
         with open(solverfile, "r") as f:
@@ -51,7 +57,9 @@ if __name__ == "__main__":
             # ratio = fun / solver_info['time']
             # comp_per_feval = other / solver_info['nfev']
             # print(f"{problem_name} fun: {fun}, other:{other}, ratio:{ratio}, comp/feval:{comp_per_feval}")
-            times_per_feval.append(solver_info["time"] / solver_info["nfev"] - function_info['mean'])
+            times_per_feval.append(
+                solver_info["time"] / solver_info["nfev"] - function_info["mean"]
+            )
 
         print(
             f"mean: {np.mean(times_per_feval)}, std: {np.std(times_per_feval)}, min: {min(times_per_feval)}, max: {max(times_per_feval)}"

@@ -1,0 +1,23 @@
+problems:
+single_problems:
+   SCOSINE: null # IPOpt terminate signal 9
+solvers:
+   # GenoSolver:
+   #  options:
+   #    max_iter: 100000
+   #    # verbose: 0
+   #    eps_pg: 0.00000001
+   #    eps_f: 0. #0000000000001
+   BayesianGenoSolver:
+      options:
+         max_iter: 100000
+         max_ls: 50
+         eps_pg: 0.00000001
+   # ScipySolver:
+   #    method: L-BFGS-B
+   #    options:
+   #       maxiter: 100000
+   #       #   disp: 10
+   #       ftol: 0. #0000000000001
+   #       gtol: 0.00000001
+   #    #   xtol: 0.0000000000001
