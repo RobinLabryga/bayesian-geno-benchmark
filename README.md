@@ -29,7 +29,7 @@ export ARCHDEFS="$PWD"/CUTEst/ARCHDefs/
 export SIFDECODE="$PWD"/CUTEst/SIFDecode/
 export MASTSIF="$PWD"/CUTEst/sif/
 export CUTEST="$PWD"/CUTEst/CUTEst/
-export MYARCH="pc64.lnx.gfo"
+export MYARCH="pc64.lnx.gfo" or export MYARCH="mac64.osx.gfo"
 nohup python3 main.py --config ./solved/unconstrained.yml --timeout 120 --result_dir name
 ```
 
