@@ -323,7 +323,8 @@ def plot_normalized_feval(results: dict, result_dir: str):
     ax.set_title("f evals")
     ax.set_xlabel("norm f eval")
     ax.set_ylabel("norm f val")
-    # ax.set_xscale("log")
+    # ax.set_xscale("symlog")
+    # ax.set_yscale("symlog")
 
     solver_lines = dict()
 
@@ -331,16 +332,22 @@ def plot_normalized_feval(results: dict, result_dir: str):
         feval_min = None
         f_best = None
         for solver_name, solver_result in problems_results.items():
+            if len(solver_result['fs']) == 0: continue
             min_index = np.nanargmin(solver_result['fs'])
             min_value = solver_result['fs'][min_index]
-            if f_best is None:
+            if f_best is None or min_value < f_best:
                 feval_min = min_index + 1
                 f_best = min_value
-            elif min_value <= f_best:
-                f_best = min_value
+            elif min_value == f_best:
                 feval_min = min(feval_min, min_index + 1)
 
+        if feval_min is None:
+            continue
+
         for solver_name, solver_result in problems_results.items():
+            if len(solver_result['fs']) == 0:
+                continue
+
             if solver_name not in solver_lines:
                 solver_lines[solver_name] = dict()
             solver_lines[solver_name][problem_name] = dict()

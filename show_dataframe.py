@@ -75,6 +75,9 @@ if __name__ == '__main__':
     bad_f = dframe[(dframe['solver'] == TARGET_SOLVER) & (dframe['(f-opt)/(abs(opt)+1)'] >= 1e-4)]
     print('(f-opt)/(abs(opt)+1) >= 1e-4:')
     print(bad_f[['task', 'message', 'fun2', '(f-opt)/(abs(opt)+1)', 'pgnorm', 'eps2']])
+    extended_bad_f = dframe[dframe['task'].isin(bad_f['task']) & (dframe['best'] | (dframe['solver'] == TARGET_SOLVER))]
+    print(f'(f-opt)/(abs(opt)+1) >= 1e-4: compared to best:')
+    print(extended_bad_f[['task', 'solver', 'message', 'fun', 'fun2', 'pgnorm', '(f-opt)/(abs(opt)+1)']])
 
     print('eps2 solved:')
     resss2 = dframe.groupby('solver').agg({'eps2': (lambda x: sum(x<1e-4))})
