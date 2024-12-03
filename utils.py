@@ -361,7 +361,7 @@ def plot_normalized_feval(results: dict, result_dir: str):
 
             f_max = best_fs[0]
 
-            solver_lines[solver_name][problem_name]['normalized_fs'] = [(f - f_best) / (f_max - f_best) for f in best_fs]
+            solver_lines[solver_name][problem_name]['normalized_fs'] = [(f - f_best) / (f_max - f_best) for f in best_fs] if f_max - f_best != 0 else [1.0] * len(best_fs)
             solver_lines[solver_name][problem_name]['normalized_fevals'] = [feval / feval_min for feval in range(len(fs))]
 
     if not os.path.exists(result_dir):
@@ -380,7 +380,7 @@ def plot_normalized_feval(results: dict, result_dir: str):
         f_min = [min(f) for f in fs]
         f_max = [max(f) for f in fs]
         f_mean = np.array([np.mean(f) for f in fs])
-        f_std = np.array([np.std(f, mean=mean) for f, mean in zip(fs, f_mean)])
+        f_std = np.array([np.std(f) for f, mean in zip(fs, f_mean)])
         std_lower = np.maximum(f_min, f_mean - f_std)
         std_upper = np.minimum(f_max, f_mean + f_std)
 
