@@ -100,10 +100,15 @@ single_problems:
 solvers:
    # GenoSolver:
    #  options:
+   #    callback: null
+   #    eps_f: 0.0
+   #    eps_pg: 1.0e-08
+   #    grad_test: false
+   #    m: 10
    #    max_iter: 100000
-   #    # verbose: 0
-   #    eps_pg: 0.00000001
-   #    eps_f: 0. #0000000000001
+   #    max_ls: 30
+   #    n_eps_f: 10
+   #    verbose: 0
    BayesianGenoSolver:
       options:
          max_iter: 100000
@@ -117,3 +122,7 @@ solvers:
    #       ftol: 0. #0000000000001
    #       gtol: 0.00000001
    #    #   xtol: 0.0000000000001
+   # IpoptSolver:
+   #    options:
+   #       max_iter: 100000
+   #       tol: 0.00000001
