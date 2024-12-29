@@ -304,19 +304,21 @@ def plot_f_over_feval(results: dict, result_dir: str, one_fig_pdf=True):
         fig.savefig(f"{result_dir}/f_over_feval.pdf", format="pdf")
         plt.close()
 
-def solver_times_to_json(results: dict, result_dir:str):
+
+def solver_times_to_json(results: dict, result_dir: str):
     output = dict()
     for problem_name, problems_results in results.items():
         for solver_name, solver_result in problems_results.items():
             if solver_name not in output:
                 output[solver_name] = dict()
             output[solver_name][problem_name] = dict()
-            output[solver_name][problem_name]['time'] = solver_result['time']
-            output[solver_name][problem_name]['nfev'] = len(solver_result['fs'])
+            output[solver_name][problem_name]["time"] = solver_result["time"]
+            output[solver_name][problem_name]["nfev"] = len(solver_result["fs"])
 
     for solver_name, out in output.items():
-        with open(f"{result_dir}/{solver_name}_times.json", 'w') as f:
+        with open(f"{result_dir}/{solver_name}_times.json", "w") as f:
             json.dump(out, f, sort_keys=True, indent=4)
+
 
 def plot_normalized_feval(results: dict, result_dir: str):
     fig, ax = plt.subplots(1, 1)
@@ -332,9 +334,10 @@ def plot_normalized_feval(results: dict, result_dir: str):
         feval_min = None
         f_best = None
         for solver_name, solver_result in problems_results.items():
-            if len(solver_result['fs']) == 0: continue
-            min_index = np.nanargmin(solver_result['fs'])
-            min_value = solver_result['fs'][min_index]
+            if len(solver_result["fs"]) == 0:
+                continue
+            min_index = np.nanargmin(solver_result["fs"])
+            min_value = solver_result["fs"][min_index]
             if f_best is None or min_value < f_best:
                 feval_min = min_index + 1
                 f_best = min_value
@@ -344,14 +347,17 @@ def plot_normalized_feval(results: dict, result_dir: str):
         if feval_min is None:
             continue
 
+        if f_best == -np.inf:
+            continue
+
         for solver_name, solver_result in problems_results.items():
-            if len(solver_result['fs']) == 0:
+            if len(solver_result["fs"]) == 0:
                 continue
 
             if solver_name not in solver_lines:
                 solver_lines[solver_name] = dict()
             solver_lines[solver_name][problem_name] = dict()
-            fs = solver_result['fs']
+            fs = solver_result["fs"]
 
             best_fs = list()
             best_f = fs[0]
@@ -361,8 +367,14 @@ def plot_normalized_feval(results: dict, result_dir: str):
 
             f_max = best_fs[0]
 
-            solver_lines[solver_name][problem_name]['normalized_fs'] = [(f - f_best) / (f_max - f_best) for f in best_fs] if f_max - f_best != 0 else [1.0] * len(best_fs)
-            solver_lines[solver_name][problem_name]['normalized_fevals'] = [feval / feval_min for feval in range(len(fs))]
+            solver_lines[solver_name][problem_name]["normalized_fs"] = (
+                [(f - f_best) / (f_max - f_best) for f in best_fs]
+                if f_max - f_best != 0
+                else [1.0] * len(best_fs)
+            )
+            solver_lines[solver_name][problem_name]["normalized_fevals"] = [
+                feval / feval_min for feval in range(len(fs))
+            ]
 
     if not os.path.exists(result_dir):
         os.makedirs(result_dir)
@@ -371,10 +383,10 @@ def plot_normalized_feval(results: dict, result_dir: str):
         f_evals = np.linspace(0, 4, 400)
         fs = [list() for _ in f_evals]
         for problem_name, problem_line in solver_line.items():
-            normalized_fs = problem_line['normalized_fs']
-            normalized_fevals = np.array(problem_line['normalized_fevals'])
+            normalized_fs = problem_line["normalized_fs"]
+            normalized_fevals = np.array(problem_line["normalized_fevals"])
             for i in range(len(f_evals)):
-                f_eval_index = normalized_fevals.searchsorted(f_evals[i], 'right') - 1
+                f_eval_index = normalized_fevals.searchsorted(f_evals[i], "right") - 1
                 fs[i].append(normalized_fs[f_eval_index])
 
         f_min = [min(f) for f in fs]
@@ -387,7 +399,7 @@ def plot_normalized_feval(results: dict, result_dir: str):
         ax.plot(f_evals, f_mean, label=solver_name)
         ax.fill_between(f_evals, std_lower, std_upper, alpha=0.25)
 
-        with open(f"{result_dir}/feval_normalized{solver_name}.csv", 'w') as f:
+        with open(f"{result_dir}/feval_normalized{solver_name}.csv", "w") as f:
             writer = csv.writer(f)
             writer.writerow(("feval", "mean", "std_lower", "std_upper"))
             for row in zip(f_evals, f_mean, std_lower, std_upper):
