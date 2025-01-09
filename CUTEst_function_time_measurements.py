@@ -4,9 +4,10 @@ from time import time
 import json
 import pycutest
 
-if __name__ == '__main__':
-    problemNames = pycutest.find_problems(constraints="unconstrained")
-    print(f"There are {len(problemNames)} unconstrained problems")
+if __name__ == "__main__":
+    constraint = "bound"
+    problemNames = pycutest.find_problems(constraints=constraint)
+    print(f"There are {len(problemNames)} {constraint} problems")
 
     n_samples = 1_000
 
@@ -29,22 +30,21 @@ if __name__ == '__main__':
             samples.append(time() - start)
             x = x + rng.uniform() * g
 
-        mean = np.mean(samples)
-
         measurements[problemName] = {
-            'n_samples': n_samples,
-            'total': sum(samples),
-            'median': np.median(samples),
-            'mean': mean,
-            'var': np.var(samples, mean=mean),
-            'std': np.std(samples, mean=mean),
-            'min': min(samples),
-            'max': max(samples),
+            "n_samples": n_samples,
+            "total": sum(samples),
+            "median": np.median(samples),
+            "mean": np.mean(samples),
+            "var": np.var(samples),
+            "std": np.std(samples),
+            "min": min(samples),
+            "max": max(samples),
         }
 
-
     for problem, measurement in measurements.items():
-        print(f"{problem}: median={measurement['median']}, mean={measurement['mean']}, var={measurement['var']}, std={measurement['std']}")
+        print(
+            f"{problem}: median={measurement['median']}, mean={measurement['mean']}, var={measurement['var']}, std={measurement['std']}"
+        )
 
-    with open('problem_time_measurements.json', 'w') as fp:
+    with open(f"problem_time_measurements_{constraint}.json", "w") as fp:
         json.dump(measurements, fp, sort_keys=True, indent=4)
