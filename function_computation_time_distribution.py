@@ -52,6 +52,8 @@ if __name__ == "__main__":
         for problem_name in solver_times.keys():
             function_info = function_times[problem_name]
             solver_info = solver_times[problem_name]
+            if solver_info["nfev"] == 0:
+                continue
             # fun = solver_info['nfev'] * function_info['mean']
             # other = solver_info['time'] - fun
             # ratio = fun / solver_info['time']
@@ -62,8 +64,12 @@ if __name__ == "__main__":
             )
 
         print(
-            f"mean: {np.mean(times_per_feval)}, std: {np.std(times_per_feval)}, min: {min(times_per_feval)}, max: {max(times_per_feval)}"
+            f"median: {np.median(times_per_feval)}, mean: {np.mean(times_per_feval)}, std: {np.std(times_per_feval)}, min: {min(times_per_feval)}, max: {max(times_per_feval)}"
         )
         print(
             f"{np.mean(times_per_feval) * 1000:.2f} & {np.std(times_per_feval) * 1000:.2f} & {max(times_per_feval) * 1000:.2f}"
+        )
+
+        print(
+            f"{np.median(times_per_feval) * 1000:.2f} & {np.mean(times_per_feval) * 1000:.2f} & {np.std(times_per_feval) * 1000:.2f} & {max(times_per_feval) * 1000:.2f}"
         )
