@@ -138,6 +138,9 @@ if __name__ == "__main__":
                 )
             res_add = create_additional_info(problem, res["x"])
             res.update(res_add)
+
+            res['x_valid'] = [(problem.bl <= x).all() and (x <= problem.bu).all for x in s.xs]
+
             results[problem_name][solver_name] = res
             if args.print_results:
                 print(res)
