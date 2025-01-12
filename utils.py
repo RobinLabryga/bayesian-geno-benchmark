@@ -349,6 +349,10 @@ def plot_normalized_feval(results: dict, result_dir: str, check_bound_violations
                 min_index = np.nanargmin(solver_result["fs"])
                 min_value = solver_result["fs"][min_index]
 
+            if solver_result['fun2'] < min_value:
+                min_value = solver_result['fun2']
+                min_index = len(solver_result["fs"])
+
             if f_best is None or min_value < f_best:
                 feval_min = min_index + 1
                 f_best = min_value
@@ -370,9 +374,15 @@ def plot_normalized_feval(results: dict, result_dir: str, check_bound_violations
             solver_lines[solver_name][problem_name] = dict()
             fs = solver_result["fs"]
 
+            x_bounds_violated = solver_result["x_bounds_violated"]
+
+            # Some solvers will not return a valid value. We append fun2 which is valid
+            fs.append(solver_result["fun2"])
+            x_bounds_violated.append(0)
+
             best_fs = list()
             best_f = np.inf
-            for f, bound_violations in zip(fs, solver_result["x_bounds_violated"]):
+            for f, bound_violations in zip(fs, x_bounds_violated):
                 if not bound_violations:
                     best_f = min(best_f, f)
                 best_fs.append(best_f)
