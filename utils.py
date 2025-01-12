@@ -94,7 +94,8 @@ def save_results(
     )
     plot_f_over_time(results, f"./results/{result_dir}", one_fig_pdf=one_fig_pdf)
     plot_f_over_feval(results, f"./results/{result_dir}", one_fig_pdf=one_fig_pdf)
-    plot_normalized_feval(results, f"./results/{result_dir}")
+    plot_normalized_feval(results, f"./results/{result_dir}", check_bound_violations=False)
+    plot_normalized_feval(results, f"./results/{result_dir}", check_bound_violations=True)
     plot_solved_over_time(results, f"./results/{result_dir}")
     plot_metrics_pdf(results, metrics, f"./results/{result_dir}")
     solver_times_to_json(results, f"./results/{result_dir}")
@@ -320,7 +321,7 @@ def solver_times_to_json(results: dict, result_dir: str):
             json.dump(out, f, sort_keys=True, indent=4)
 
 
-def plot_normalized_feval(results: dict, result_dir: str):
+def plot_normalized_feval(results: dict, result_dir: str, check_bound_violations=False):
     fig, ax = plt.subplots(1, 1)
     ax.set_title("f evals")
     ax.set_xlabel("norm f eval")
@@ -336,8 +337,18 @@ def plot_normalized_feval(results: dict, result_dir: str):
         for solver_name, solver_result in problems_results.items():
             if len(solver_result["fs"]) == 0:
                 continue
-            min_index = np.nanargmin(solver_result["fs"])
-            min_value = solver_result["fs"][min_index]
+
+            if check_bound_violations:
+                valid_idx = np.where(np.array(solver_result['x_bounds_violated']) == 0)[0]
+                if len(valid_idx) == 0: 
+                    continue
+
+                min_index = valid_idx[np.nanargmin(np.array(solver_result['fs'])[valid_idx])]
+                min_value = solver_result["fs"][min_index]
+            else:
+                min_index = np.nanargmin(solver_result["fs"])
+                min_value = solver_result["fs"][min_index]
+
             if f_best is None or min_value < f_best:
                 feval_min = min_index + 1
                 f_best = min_value
@@ -360,15 +371,16 @@ def plot_normalized_feval(results: dict, result_dir: str):
             fs = solver_result["fs"]
 
             best_fs = list()
-            best_f = fs[0]
-            for f in fs:
-                best_f = min(best_f, f)
+            best_f = np.inf
+            for f, bound_violations in zip(fs, solver_result["x_bounds_violated"]):
+                if not bound_violations:
+                    best_f = min(best_f, f)
                 best_fs.append(best_f)
 
-            f_max = best_fs[0]
+            f_max = np.nanmax([f for f in best_fs if f != np.inf])
 
             solver_lines[solver_name][problem_name]["normalized_fs"] = (
-                [(f - f_best) / (f_max - f_best) for f in best_fs]
+                [(f - f_best) / (f_max - f_best) if f != np.inf else 1.0 for f in best_fs]
                 if f_max - f_best != 0
                 else [1.0] * len(best_fs)
             )
@@ -399,7 +411,7 @@ def plot_normalized_feval(results: dict, result_dir: str):
         ax.plot(f_evals, f_mean, label=solver_name)
         ax.fill_between(f_evals, std_lower, std_upper, alpha=0.25)
 
-        with open(f"{result_dir}/feval_normalized{solver_name}.csv", "w") as f:
+        with open(f"{result_dir}/feval_normalized{solver_name}{'_bound' if check_bound_violations else ''}.csv", "w") as f:
             writer = csv.writer(f)
             writer.writerow(("feval", "mean", "std_lower", "std_upper"))
             for row in zip(f_evals, f_mean, std_lower, std_upper):
@@ -407,7 +419,7 @@ def plot_normalized_feval(results: dict, result_dir: str):
 
     ax.legend()
 
-    fig.savefig(f"{result_dir}/feval_normalized.pdf", format="pdf")
+    fig.savefig(f"{result_dir}/feval_normalized{'_bound' if check_bound_violations else ''}.pdf", format="pdf")
     plt.close()
 
 
