@@ -1,8 +1,27 @@
 import os
 import argparse
+import sys
 
 from utils import load_results
 import pickle
+
+HERE_TEST_PATH = os.path.dirname(os.path.abspath(__file__))
+if os.path.exists(os.path.join(HERE_TEST_PATH, './genosolver/')):
+    sys.path.insert(0, os.path.join(HERE_TEST_PATH, './genosolver/'))
+    import genosolver
+    sys.path.pop(0)
+else:
+    raise ImportError('No genosolver folder')
+
+if os.path.exists(os.path.join(HERE_TEST_PATH, "./bayesian-geno/")):
+    sys.path.insert(0, os.path.join(HERE_TEST_PATH, "./bayesian-geno/"))
+
+    import bayesian_line_search.GPgenosolver
+
+    sys.path.pop(0)
+else:
+    print(HERE_TEST_PATH)
+    raise ImportError("No bayesian genosolver folder")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Pickle helper.", add_help=False)
