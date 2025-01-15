@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
                 check_bound_violations(solver_name, solver_result)
 
-                if not any(solver_result['x_bounds_violated']): continue
+                if not any(solver_result['x_bounds_violated']) and not f_best > solver_result['fun2']: continue
 
                 problem = import_problem(problem, problem_name)
                 check_result_bound(problem, solver_name, solver_result)
