@@ -170,6 +170,28 @@ if __name__ == "__main__":
     )
     print(dframe.groupby("solver").agg({"f_or_g_opt": (lambda x: sum(1 * x))}))
 
+    print(f"not f or g compared to best:")
+    bad_f_or_g = dframe[
+        (dframe["solver"] == TARGET_SOLVER) & (dframe["f_or_g_opt"] == False)
+    ]
+    extended_bad_f_or_g = dframe[
+        dframe["task"].isin(bad_f_or_g["task"])
+        & (dframe["best"] | (dframe["solver"] == TARGET_SOLVER))
+    ]
+    print(
+        extended_bad_f_or_g[
+            [
+                "task",
+                "solver",
+                "message",
+                "fun",
+                "fun2",
+                "rel_pgnorm",
+                "(f-opt)/(abs(opt)+1)",
+            ]
+        ]
+    )
+
     print("f and g")
     dframe["f_and_g_opt"] = (dframe["(f-opt)/(abs(opt)+1)"] < 1e-4) & (
         dframe["rel_pgnorm"] < 1e-6
