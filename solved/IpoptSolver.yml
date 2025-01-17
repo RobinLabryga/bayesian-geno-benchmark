@@ -1,0 +1,5 @@
+solvers:
+   IpoptSolver:
+      options:
+         max_iter: 100000
+         tol: 0.00000001

@@ -57,6 +57,50 @@ def setup_from_config_file(handle, available_problems, available_solvers):
 
     return problem_dict, solver_dict, problems, solvers
 
+def setup_from_solver_config_file(handle):
+    """Return solvers contained in handle, with their respective options."""
+    assert os.path.exists(handle), f"Config file {handle} doesn't exist"
+    with open(handle, "r") as f:
+        try:
+            config = yaml.safe_load(f)
+        except yaml.YAMLError as e:
+            return e
+
+    # get solvers the same as before
+    solver_dict = config["solvers"]
+    for solver_name in solver_dict.keys():
+        if solver_dict[solver_name] is None:
+            solver_dict[solver_name] = {"options": {}}
+
+    solvers = find_solvers(solver_dict.keys())
+
+    return solver_dict, solvers
+
+def setup_from_problem_config_file(handle):
+    """Return problems contained in handle, with their respective options."""
+    assert os.path.exists(handle), f"Config file {handle} doesn't exist"
+    with open(handle, "r") as f:
+        try:
+            config = yaml.safe_load(f)
+        except yaml.YAMLError as e:
+            return e
+
+    if config["problems"] == "all":
+        problems = pycutest.find_problems()
+    elif "single_problems" not in config.keys():
+        # instead of single problems, we're loading them by category now
+        # see https://jfowkes.github.io/pycutest/_build/html/functions/pycutest.find_problems.html
+        # TODO add sifParams to config yaml
+        problems = pycutest.find_problems(**config["problems"])
+    else:
+        # load single problems
+        problems = config["single_problems"].keys()
+
+    problem_dict = dict()
+    for problem in problems:
+        problem_dict[problem] = None
+
+    return problem_dict, problems
 
 def decode_dict(d: dict):
     """Convert bytes to str for yaml dumping."""
@@ -402,7 +446,7 @@ def plot_normalized_feval(results: dict, result_dir: str, check_bound_violations
         os.makedirs(result_dir)
 
     for solver_name, solver_line in solver_lines.items():
-        f_evals = np.linspace(0, 4, 400)
+        f_evals = np.linspace(0, 16, 640)
         fs = [list() for _ in f_evals]
         for problem_name, problem_line in solver_line.items():
             normalized_fs = problem_line["normalized_fs"]
@@ -468,6 +512,12 @@ def plot_metrics_pdf(
     )
     problem_names = results.keys()
     solver_names = results[next(iter(problem_names))].keys()
+
+    for s in solver_names:
+        for p in problem_names:
+            if s not in results[p]:
+                print(f"{s} not in {p}")
+
     for i, met in enumerate(metrics):
         legend = []
         for s in solver_names:

@@ -10,6 +10,8 @@ from utils import (
     setup_from_config_file,
     create_failed_result,
     create_additional_info,
+    setup_from_problem_config_file,
+    setup_from_solver_config_file,
 )
 
 
@@ -37,10 +39,14 @@ if __name__ == "__main__":
         help=f"Available problems are: {available_problems}. Available solvers are {available_solvers}",
     )
     parser.add_argument(
-        "--config",
+        "--problem_config",
         type=str,
-        default="./example_config.yml",
-        help="Path to .yaml config file to use for benchmarks. By default './example_config.yml'",
+        help="Path to .yaml problem config file to use for benchmarks.",
+    )
+    parser.add_argument(
+        "--solver_config",
+        type=str,
+        help="Path to .yaml solver config file to use for benchmarks.",
     )
     parser.add_argument(
         "--no-save", action="store_true", help="Do not save to results/ directory."
@@ -69,10 +75,8 @@ if __name__ == "__main__":
     parser.add_argument("--print_results", action="store_true", help="TBA")
     args = parser.parse_args()
 
-    config = args.config
-    problem_dict, solver_dict, problems, solvers = setup_from_config_file(
-        config, available_problems, available_solvers
-    )
+    problem_dict, problems = setup_from_problem_config_file(args.problem_config)
+    solver_dict, solvers = setup_from_solver_config_file(args.solver_config)
 
     print(f"Solving {len(problems)} problems...")
     results = dict()

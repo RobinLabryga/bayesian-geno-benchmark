@@ -1,0 +1,7 @@
+solvers:
+   BayesianGenoSolver:
+      options:
+         max_iter: 100000
+         max_ls: 50
+         eps_pg: 0.00000001
+         eps_f: 0.

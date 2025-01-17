@@ -1,0 +1,30 @@
+problems:
+single_problems:
+  3PK: null
+  ALLINIT: null
+  BDEXP: null
+  BIGGSB1: null
+  BLEACHNG: null
+  BQP1VAR: null
+  BQPGABIM: null
+  BQPGASIM: null
+  BQPGAUSS: null
+  BRANIN: null
+  CAMEL6: null
+  CHARDIS0: null
+  CHARDIS02: null
+  CHEBYQAD: null
+  CHENHARK: null
+  CVXBQP1: null
+  CYCLOOCTLS: null
+  DECONVB: null
+  DEGDIAG: null
+  DEGTRID: null
+  DEGTRID2: null
+  DEVGLA1B: null
+  DEVGLA2B: null
+  DGOSPEC: null
+  DIAGIQB: null
+  DIAGIQE: null
+  DIAGIQT: null
+  # DIAGNQB: null
