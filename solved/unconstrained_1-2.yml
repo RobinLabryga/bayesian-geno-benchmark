@@ -1,0 +1,78 @@
+problems:
+single_problems:
+   CRAGGLVY: null
+   CUBE: null
+   CURLY10: null
+   CURLY20: null
+   CURLY30: null
+   CYCLOOCFLS: null
+   DANIWOODLS: null
+   DANWOODLS: null
+   DENSCHNA: null
+   DENSCHNB: null
+   DENSCHNC: null
+   DENSCHND: null
+   DENSCHNE: null
+   DENSCHNF: null
+   DEVGLA1: null
+   DEVGLA2: null
+   DIAMON2DLS: null
+   DIAMON3DLS: null
+   DIXMAANA1: null
+   DIXMAANB: null
+   DIXMAANC: null
+   DIXMAAND: null
+   DIXMAANE1: null
+   DIXMAANF: null
+   DIXMAANG: null
+   DIXMAANH: null
+   DIXMAANI1: null
+   DIXMAANJ: null
+   DIXMAANK: null
+   DIXMAANL: null
+   DIXMAANM1: null
+   DIXMAANN: null
+   DIXMAANO: null
+   DIXMAANP: null
+   DIXON3DQ: null
+   DJTL: null
+   DMN15102LS: null
+   DMN15103LS: null
+   DMN15332LS: null
+   DMN15333LS: null
+   DMN37142LS: null
+   DMN37143LS: null
+   DQDRTIC: null
+   DQRTIC: null
+   ECKERLE4LS: null
+   EDENSCH: null
+   EG2: null
+   EGGCRATE: null
+   EIGENALS: null
+   EIGENBLS: null
+   EIGENCLS: null
+   # ELATVIDU: null
+solvers:
+   # GenoSolver:
+  #    options:
+  #     max_iter: 100000
+  #     eps_pg: 0.00000001
+  #     eps_f: 0.
+   BayesianGenoSolver:
+      options:
+         max_iter: 100000
+         max_ls: 50
+         eps_pg: 0.00000001
+         eps_f: 0.
+  #  ScipySolver:
+  #     method: L-BFGS-B
+  #     options:
+  #        maxiter: 100000
+  #        #   disp: 10
+  #        ftol: 0. #0000000000001
+  #        gtol: 0.00000001
+  #     #   xtol: 0.0000000000001
+  #  IpoptSolver:
+  #     options:
+  #        max_iter: 100000
+  #        tol: 0.00000001

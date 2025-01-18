@@ -99,30 +99,25 @@ single_problems:
    ZANGWIL2: null
 solvers:
    # GenoSolver:
-   #  options:
-   #    callback: null
-   #    eps_f: 0.0
-   #    eps_pg: 1.0e-08
-   #    grad_test: false
-   #    m: 10
+   #   options:
    #    max_iter: 100000
-   #    max_ls: 30
-   #    n_eps_f: 10
-   #    verbose: 0
-   BayesianGenoSolver:
+   #    eps_pg: 0.00000001
+   #    eps_f: 0.
+  #  BayesianGenoSolver:
+  #     options:
+  #        max_iter: 100000
+  #        max_ls: 50
+  #        eps_pg: 0.00000001
+  #        eps_f: 0.
+   ScipySolver:
+      method: L-BFGS-B
       options:
-         max_iter: 100000
-         max_ls: 50
-         eps_pg: 0.00000001
-   # ScipySolver:
-   #    method: L-BFGS-B
-   #    options:
-   #       maxiter: 100000
-   #       #   disp: 10
-   #       ftol: 0. #0000000000001
-   #       gtol: 0.00000001
-   #    #   xtol: 0.0000000000001
-   # IpoptSolver:
-   #    options:
-   #       max_iter: 100000
-   #       tol: 0.00000001
+         maxiter: 100000
+         #   disp: 10
+         ftol: 0. #0000000000001
+         gtol: 0.00000001
+      #   xtol: 0.0000000000001
+  #  IpoptSolver:
+  #     options:
+  #        max_iter: 100000
+  #        tol: 0.00000001

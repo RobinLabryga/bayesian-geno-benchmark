@@ -1,0 +1,80 @@
+problems:
+single_problems:
+   ROSENBR: null
+   ROSENBRTU: null
+   ROSZMAN1LS: null
+   S308: null
+   SBRYBND: null
+   SCHMVETT: null
+   #   SCOSINE: null # IPOpt terminate signal 9
+   SCURLY10: null
+   SCURLY20: null
+   SCURLY30: null
+   SENSORS: null
+   SINEVAL: null
+   SINQUAD: null
+   SISSER: null
+   SNAIL: null
+   SPARSINE: null
+   SPARSQUR: null
+   SPIN2LS: null
+   SPINLS: null
+   SPMSRTLS: null
+   SROSENBR: null
+   SSBRYBND: null
+   SSCOSINE: null
+   SSI: null
+   #   STRATEC: null # -inf?
+   STREG: null
+   STRTCHDV: null
+   TESTQUAD: null
+   THURBERLS: null
+   TOINTGOR: null
+   TOINTGSS: null
+   TOINTPSP: null
+   TOINTQOR: null
+   TQUARTIC: null
+   TRIDIA: null
+   TRIGON1: null
+   TRIGON2: null
+   VANDANMSLS: null
+   VARDIM: null
+   VAREIGVL: null
+   VESUVIALS: null
+   VESUVIOLS: null
+   VESUVIOULS: null
+   VIBRBEAM: null
+   WATSON: null
+   WAYSEA1: null
+   WAYSEA2: null
+   WOODS: null
+   YATP1CLS: null
+   YATP1LS: null
+   YATP2CLS: null
+   YATP2LS: null
+   YFITU: null
+   ZANGWIL2: null
+solvers:
+  # GenoSolver:
+  #    options:
+  #     max_iter: 100000
+  #     eps_pg: 0.00000001
+  #     eps_f: 0.
+   BayesianGenoSolver:
+      options:
+         max_iter: 100000
+         max_ls: 50
+         eps_pg: 0.00000001
+         eps_f: 0.
+  #  ScipySolver:
+  #     method: L-BFGS-B
+  #     options:
+  #        maxiter: 100000
+  #        #   disp: 10
+  #        ftol: 0. #0000000000001
+  #        gtol: 0.00000001
+  #     #   xtol: 0.0000000000001
+  #  IpoptSolver:
+  #     options:
+  #        max_iter: 100000
+  #        tol: 0.00000001
