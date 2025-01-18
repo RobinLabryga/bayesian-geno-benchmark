@@ -1,0 +1,25 @@
+problems:
+single_problems:
+   # TOINTPSP: null
+   TOINTQOR: null
+   TQUARTIC: null
+   TRIDIA: null
+   TRIGON1: null
+   TRIGON2: null
+   VANDANMSLS: null
+   VARDIM: null
+   VAREIGVL: null
+   VESUVIALS: null
+   VESUVIOLS: null
+   VESUVIOULS: null
+   VIBRBEAM: null
+   WATSON: null
+   WAYSEA1: null
+   WAYSEA2: null
+   WOODS: null
+   YATP1CLS: null
+   YATP1LS: null
+   YATP2CLS: null
+   YATP2LS: null
+   YFITU: null
+   ZANGWIL2: null

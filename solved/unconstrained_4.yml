@@ -1,0 +1,34 @@
+problems:
+single_problems:
+   # GAUSSIAN: null
+   GBRAINLS: null
+   GENHUMPS: null
+   GENROSE: null
+   GROWTHLS: null
+   GULF: null
+   HAHN1LS: null
+   HAIRY: null
+   HATFLDD: null
+   HATFLDE: null
+   HATFLDFL: null
+   HATFLDFLS: null
+   HATFLDGLS: null
+   HEART6LS: null
+   HEART8LS: null
+   HELIX: null
+   HIELOW: null
+   HILBERTA: null
+   HILBERTB: null
+   HIMMELBB: null
+   HIMMELBCLS: null
+   HIMMELBF: null
+   HIMMELBG: null
+   HIMMELBH: null
+   HUMPS: null
+   HYDC20LS: null
+   HYDCAR6LS: null
+   INDEF: null
+   INDEFM: null
+   INTEQNELS: null
+   JENSMP: null
+   # JIMACK: null

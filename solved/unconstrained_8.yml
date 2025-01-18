@@ -1,0 +1,34 @@
+problems:
+single_problems:
+   # S308: null
+   SBRYBND: null
+   SCHMVETT: null
+   SCOSINE: null
+   SCURLY10: null
+   SCURLY20: null
+   SCURLY30: null
+   SENSORS: null
+   SINEVAL: null
+   SINQUAD: null
+   SINQUAD2: null
+   SISSER: null
+   SISSER2: null
+   SNAIL: null
+   SPARSINE: null
+   SPARSQUR: null
+   SPIN2LS: null
+   SPINLS: null
+   SPMSRTLS: null
+   SROSENBR: null
+   SSBRYBND: null
+   SSCOSINE: null
+   SSI: null
+   STRATEC: null
+   STREG: null
+   STRTCHDV: null
+   TESTQUAD: null
+   THURBERLS: null
+   TOINTGOR: null
+   TOINTGSS: null
+   TOINTPSP: null
+   # TOINTQOR: null

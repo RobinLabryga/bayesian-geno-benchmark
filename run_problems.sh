@@ -6,8 +6,24 @@ export MASTSIF="$PWD"/CUTEst/sif/
 export CUTEST="$PWD"/CUTEst/CUTEst/
 export MYARCH="pc64.lnx.gfo"
 
-run_names=("4" "1-1" "1-2" "2" "3-1" "3-2" "bound_0" "bound_1" "bound_2" "bound_3" "bound_4" "bound_5")
-run_configs=("./solved/SCOSINE.yml" "./solved/unconstrained_1-1.yml" "./solved/unconstrained_1-2.yml" "./solved/unconstrained_2.yml" "./solved/unconstrained_3-1.yml" "./solved/unconstrained_3-2.yml" "./solved/bound_0.yml" "./solved/bound_1.yml" "./solved/bound_2.yml" "./solved/bound_3.yml" "./solved/bound_4.yml" "./solved/bound_5.yml")
+run_names=(
+    "unconstrained_0"
+    "unconstrained_1"
+    "unconstrained_2"
+    "unconstrained_3"
+    "unconstrained_4"
+    "unconstrained_5"
+    "unconstrained_6"
+    "unconstrained_7"
+    "unconstrained_8"
+    "unconstrained_9"
+    "bound_0"
+    "bound_1"
+    "bound_2"
+    "bound_3"
+    "bound_4"
+    "bound_5"
+)
 
 timeout=3000
 setup_name=scipy
@@ -15,13 +31,12 @@ solver_config="solved/ScipySolver.yml"
 results_directory="${timeout}/${setup_name}/"
 
 for i in ${!run_names[*]}; do
-    config=${run_configs[$i]}
     run_name=${run_names[$i]}
-    part_name="part${run_name}"
-    result_directory="${results_directory}${part_name}"
+    problem_config="./solved/${run_name}.yml"
+    result_directory="${results_directory}${run_name}"
     if [ -e "results/$result_directory" ]; then
         echo $result_directory already exists
         continue
     fi
-    python3 -u main.py --problem_config ${config} --solver_config ${solver_config} --timeout ${timeout} --result_dir ${result_directory}
+    python3 -u main.py --problem_config ${problem_config} --solver_config ${solver_config} --timeout ${timeout} --result_dir ${result_directory}
 done
