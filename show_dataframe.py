@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
     print("\nProblems that were not solved")
     print(
-        dframe[dframe["(f-opt)/(abs(opt)+1)"] < 1e-4]
+        dframe[dframe["(f-opt)/(abs(opt)+1)"] >= 1e-4]
         .groupby("solver")["task"]
         .apply(list)
     )
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     print(dframe.groupby("solver").agg({"rel_pgnorm": (lambda x: sum(x < 1e-6))}))
 
     print("\nProblems that were not solved")
-    print(dframe[dframe["rel_pgnorm"] < 1e-6].groupby("solver")["task"].apply(list))
+    print(dframe[dframe["rel_pgnorm"] >= 1e-6].groupby("solver")["task"].apply(list))
 
     print("rel_pgnorm >= 1e-6 compared to best")
     pg_bad = dframe[
