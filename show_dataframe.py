@@ -210,8 +210,6 @@ if __name__ == "__main__":
     print(dframe.groupby("solver").agg({"not_f_not_g_opt": (lambda x: sum(1 * x))}))
     print(dframe[dframe["not_f_not_g_opt"]].groupby("solver")["task"].apply(list))
 
-    exit()
-
     if args.plot_again:
         results = defaultdict(dict)
         for result in all_results:
