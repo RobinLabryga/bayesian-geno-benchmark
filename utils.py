@@ -410,14 +410,10 @@ def plot_normalized_feval(results: dict, result_dir: str, check_bound_violations
             continue
 
         for solver_name, solver_result in problems_results.items():
-            if len(solver_result["fs"]) == 0:
-                continue
-
             if solver_name not in solver_lines:
                 solver_lines[solver_name] = dict()
             solver_lines[solver_name][problem_name] = dict()
             fs = solver_result["fs"]
-
             x_bounds_violated = solver_result["x_bounds_violated"]
 
             # Some solvers will not return a valid value. We append fun2 which is valid
