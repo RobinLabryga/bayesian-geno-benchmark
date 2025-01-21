@@ -86,8 +86,7 @@ if __name__ == "__main__":
     pd.set_option("display.max_colwidth", None)
 
     dframe = pd.DataFrame.from_dict(Dc).sort_values(["task", "solver"])
-    opt = dframe.groupby("task")["fun"].transform("min")
-    dframe["opt"] = opt
+    dframe["opt"] = dframe.groupby("task")["fun"].transform("min")
     dframe["opt2"] = dframe.groupby("task")["fun2"].transform("min")
     dframe["best"] = dframe["fun2"] == dframe["opt2"]
     dframe["(f-opt)/(abs(opt)+1)"] = dframe.groupby("task")["fun2"].transform(
@@ -96,24 +95,27 @@ if __name__ == "__main__":
     dframe["rel_pgnorm"] = dframe["pgnorm"] / (abs(dframe["fun2"]) + 1)
     # print(dframe)
 
-    print("----------function value solved----------")
+    print("Number of bound problems:")
+    print(dframe[dframe["opt2"] != -np.inf]["task"].nunique())
+    unbound_problems = dframe[dframe["opt2"] == -np.inf]["task"].unique()
+    print("Unbound problems:")
+    print(unbound_problems)
 
-    print(
-        dframe.groupby("solver").agg(
-            {"(f-opt)/(abs(opt)+1)": (lambda x: sum(x < 1e-4))}
-        )
-    )
+    print("----------function value solved ((f-opt)/(abs(opt)+1))----------")
+
+    dframe["f_opt"] = (dframe["(f-opt)/(abs(opt)+1)"] < 1e-4) & (~dframe["task"].isin(unbound_problems))
+    print(dframe.groupby("solver").agg({"f_opt": (lambda x: sum(1 * x))}))
 
     print("\nProblems that were not solved")
     print(
-        dframe[dframe["(f-opt)/(abs(opt)+1)"] >= 1e-4]
+        dframe[~dframe["f_opt"]]
         .groupby("solver")["task"]
         .apply(list)
     )
 
     print(f"(f-opt)/(abs(opt)+1) >= 1e-4: compared to best:")
     bad_f = dframe[
-        (dframe["solver"] == TARGET_SOLVER) & (dframe["(f-opt)/(abs(opt)+1)"] >= 1e-4)
+        (dframe["solver"] == TARGET_SOLVER) & (~dframe["f_opt"])
     ]
     extended_bad_f = dframe[
         dframe["task"].isin(bad_f["task"])
@@ -133,16 +135,17 @@ if __name__ == "__main__":
         ]
     )
 
-    print("----------gradient solved----------")
+    print("----------gradient solved (rel_pgnorm < 1e-6)----------")
 
-    print(dframe.groupby("solver").agg({"rel_pgnorm": (lambda x: sum(x < 1e-6))}))
-
+    dframe["g_opt"] = (dframe["rel_pgnorm"] < 1e-6) & (~dframe["task"].isin(unbound_problems))
+    print(dframe.groupby("solver").agg({"g_opt": (lambda x: sum(1 * x))}))
+    
     print("\nProblems that were not solved")
-    print(dframe[dframe["rel_pgnorm"] >= 1e-6].groupby("solver")["task"].apply(list))
+    print(dframe[~dframe["g_opt"]].groupby("solver")["task"].apply(list))
 
     print("rel_pgnorm >= 1e-6 compared to best")
     pg_bad = dframe[
-        (dframe["solver"] == TARGET_SOLVER) & (dframe["rel_pgnorm"] >= 1e-6)
+        (dframe["solver"] == TARGET_SOLVER) & (~dframe["g_opt"])
     ]
     extended_pg_bad = dframe[
         dframe["task"].isin(pg_bad["task"])
@@ -165,14 +168,12 @@ if __name__ == "__main__":
     print("----------Converge in f and/or g----------")
 
     print("f or g")
-    dframe["f_or_g_opt"] = (dframe["(f-opt)/(abs(opt)+1)"] < 1e-4) | (
-        dframe["rel_pgnorm"] < 1e-6
-    )
+    dframe["f_or_g_opt"] = dframe["f_opt"] | dframe["g_opt"]
     print(dframe.groupby("solver").agg({"f_or_g_opt": (lambda x: sum(1 * x))}))
 
     print(f"not f or g compared to best:")
     bad_f_or_g = dframe[
-        (dframe["solver"] == TARGET_SOLVER) & (dframe["f_or_g_opt"] == False)
+        (dframe["solver"] == TARGET_SOLVER) & (~dframe["f_or_g_opt"])
     ]
     extended_bad_f_or_g = dframe[
         dframe["task"].isin(bad_f_or_g["task"])
@@ -193,29 +194,23 @@ if __name__ == "__main__":
     )
 
     print("f and g")
-    dframe["f_and_g_opt"] = (dframe["(f-opt)/(abs(opt)+1)"] < 1e-4) & (
-        dframe["rel_pgnorm"] < 1e-6
-    )
+    dframe["f_and_g_opt"] = dframe["f_opt"] & dframe["g_opt"]
     print(dframe.groupby("solver").agg({"f_and_g_opt": (lambda x: sum(1 * x))}))
 
     print("not f and g")
-    dframe["not_f_g_opt"] = (dframe["(f-opt)/(abs(opt)+1)"] >= 1e-4) & (
-        dframe["rel_pgnorm"] < 1e-6
-    )
+    dframe["not_f_g_opt"] = (~dframe["f_opt"]) & dframe["g_opt"]
     print(dframe.groupby("solver").agg({"not_f_g_opt": (lambda x: sum(1 * x))}))
 
     print("f and not g")
-    dframe["f_not_g_opt"] = (dframe["(f-opt)/(abs(opt)+1)"] < 1e-4) & (
-        dframe["rel_pgnorm"] >= 1e-6
-    )
+    dframe["f_not_g_opt"] = dframe["f_opt"] & (~dframe["g_opt"])
     print(dframe.groupby("solver").agg({"f_not_g_opt": (lambda x: sum(1 * x))}))
 
     print("not f and not g")
-    dframe["not_f_not_g_opt"] = (dframe["(f-opt)/(abs(opt)+1)"] >= 1e-4) & (
-        dframe["rel_pgnorm"] >= 1e-6
-    )
+    dframe["not_f_not_g_opt"] = (~dframe["f_opt"]) & (~dframe["g_opt"])
     print(dframe.groupby("solver").agg({"not_f_not_g_opt": (lambda x: sum(1 * x))}))
     print(dframe[dframe["not_f_not_g_opt"]].groupby("solver")["task"].apply(list))
+
+    exit()
 
     if args.plot_again:
         results = defaultdict(dict)
