@@ -54,6 +54,8 @@ if __name__ == "__main__":
             solver_info = solver_times[problem_name]
             if solver_info["nfev"] == 0:
                 continue
+            if solver_info["time"] == 0:
+                continue
             # fun = solver_info['nfev'] * function_info['mean']
             # other = solver_info['time'] - fun
             # ratio = fun / solver_info['time']
@@ -73,3 +75,17 @@ if __name__ == "__main__":
         print(
             f"{np.median(times_per_feval) * 1000:.2f} & {np.mean(times_per_feval) * 1000:.2f} & {np.std(times_per_feval) * 1000:.2f} & {max(times_per_feval) * 1000:.2f}"
         )
+
+        data = np.array(times_per_feval) * 1000
+        median = np.median(data)
+        upper_quartile = np.percentile(data, 75)
+        lower_quartile = np.percentile(data, 25)
+
+        iqr = upper_quartile - lower_quartile
+        upper_whisker = data[data<=upper_quartile+1.5*iqr].max()
+        lower_whisker = max(0.0, data[data>=lower_quartile-1.5*iqr].min())
+
+        outliers = data[(data>upper_whisker) | (data<lower_whisker)]
+
+        print(f"lower whisker={lower_whisker}, lower quartile={lower_quartile}, median={median}, upper quartile={upper_quartile}, upper whisker={upper_whisker}")
+        print(outliers)
